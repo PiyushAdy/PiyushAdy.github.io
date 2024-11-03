@@ -1,13 +1,13 @@
 <html>
     <head>
-        <meta charset="UTF-8">
+      <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
       <link href="https://cdn.jsdelivr.net/npm/beercss@3.7.10/dist/cdn/beer.min.css" rel="stylesheet" />
       <script type="module" src="https://cdn.jsdelivr.net/npm/material-dynamic-colors@1.1.2/dist/cdn/material-dynamic-colors.min.js"></script>
       <script src="https://kit.fontawesome.com/b048df2df3.js" crossorigin="anonymous"></script>
     <style>
         :root,
-        body.dark{
+        body.dark-blue{
           --primary:#72d2ff;
           --on-primary:#003548;
           --primary-container:#004d66;
@@ -47,7 +47,7 @@
         }
 
         :root,
-        body.light{
+        body.light-blue{
             --primary:#006687;
             --on-primary:#ffffff;
             --primary-container:#c1e8ff;
@@ -87,8 +87,7 @@
         }
     </style>
     </head>
-    <body class="dark">
-        
+    <body class="dark-blue">
       <!--Top Bar -->
       <!--
       <nav class="top border small-blur bottom-round">
@@ -97,32 +96,28 @@
       -->
       
           <!--Bottom Bar-->
-          <nav class="left center-align space right-round  surface-dim">
+          <nav class="bottom no-space top-round small-blur border">
             
-            <a href="#About">
+            <button class="border left-round vertical" onclick="window.location.href='#About'">
               <i class="fa-solid fa-user"></i>
               <span>About</span>
-            </a>
-            <a href="#Skills">
+            </button>
+            <button class="border no-round vertical" onclick="window.location.href='#Skills'">
               <i class="fa-solid fa-code"></i>
               <span>Skills</span>
-            </a>
-            <a href="#Profiles">
+            </button>
+            <button class="border no-round vertical" onclick="window.location.href='#Profiles'">
               <i class="fa-brands fa-github"></i>
               <span>Profiles</span>
-            </a>
-            <a href="#Socials">
-              <i class="fa-solid fa-address-card "></i>
-              <span >Socials</span>
-            </a>
-            <a href="#" onclick="toggleTheme()">
-                <i class="fa-solid fa-brush"></i>
-                <span>Theme</span>
-            </a>
+            </button>
+            <button class="border right-round vertical" onclick="window.location.href='#Socials'">
+              <i class="fa-solid fa-address-card"></i>
+              <span>Socials</span>
+            </button>
           </nav>
           
           <!--About-->
-          <article class="padding surface-container round" id="About">
+          <article class="padding primary-border border round" id="About">
             <div class="grid no-space">
               
               <div class="s6">
@@ -134,13 +129,13 @@
                 </div>
               </div>
               <div class="s6 right-align">
-                <img style="width:300px;height:300px" class="circle"  src="profile.jpg" id="profile_pic">
+                <img style="width:300px;height:300px" class="circle"  src="https://i.pinimg.com/236x/87/aa/02/87aa026b1e15abe8dc301a0a0bc89764.jpg" >
               </div>
             </div>
           </article>
 
           <!--Skills-->
-          <article class="padding --surface-container round" id="Skills">
+          <article class="padding primary-border border round" id="Skills">
             <h5><b>I am quite acquainted with </b></h5><br>
             
             <a class="row wave"><i class="fa-2xl extra fa-brands fa-php extra"></i><span> PHP </span></a><hr>
@@ -154,7 +149,7 @@
 
 
           <!--Socials Page-->
-          <article class="padding surface-container round" id="Socials">
+          <article class="padding primary-border border round" id="Socials">
             <h5><b>Connect with me on </b></h5><br>
   
             <a class="row wave" href="https://linkedin.com" target="_blank"><i class="fa-2xl extra fa-brands fa-linkedin extra"></i><span> <b>Linkedin</b> </span></a><hr>
@@ -167,25 +162,13 @@
           </article>
 
           <!--Profiles Page-->
-          <article class="padding surface-container round" id="Profiles">
+          <article class="padding primary-border border round" id="Profiles">
             <h5><b>View My Coding journey on </b></h5><br>
             <a class="row wave" href="https://github.com" target="_blank"><i class="fa-2xl extra fa-brands fa-github-alt extra"></i><span> <b>Github</b> </span></a><hr>
             <a class="row wave" href="https://hackerrank.com/" target="_blank"><i class="fa-2xl fa-brands fa-hackerrank extra"></i><span>HackerRank</span></a>
            
           </article>
           
-          <script>
-            function toggleTheme() {
-              const currentTheme = document.body.getAttribute("class");
-              const newTheme = currentTheme === "light" ? "dark" : "light";
-              if (newTheme==="light"){
-                img_src="profile_processed.png";
-              }else if (newTheme==="dark"){
-                img_src="profile.jpg";
-              }
-              document.getElementById("profile_pic").src=img_src;
-              document.body.setAttribute("class", newTheme);
-            }
-          </script>   
+          
     </body>
 </html>
