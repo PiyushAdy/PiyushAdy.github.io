@@ -4,7 +4,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
       <link href="https://cdn.jsdelivr.net/npm/beercss@3.7.10/dist/cdn/beer.min.css" rel="stylesheet" />
       <script type="module" src="https://cdn.jsdelivr.net/npm/material-dynamic-colors@1.1.2/dist/cdn/material-dynamic-colors.min.js"></script>
-      <script src="https://kit.fontawesome.com/b048df2df3.js" crossorigin="anonymous"></script>
+      <link
+        rel="stylesheet"
+        href="https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css"
+      >
     <style>
         :root,
         body.dark{
@@ -46,48 +49,49 @@
           --surface-container-highest:#323537;
         }
 
+        
         :root,
         body.light{
-            --primary:#006687;
-            --on-primary:#ffffff;
-            --primary-container:#c1e8ff;
-            --on-primary-container:#001e2b;
-            --secondary:#4d616c;
-            --on-secondary:#ffffff;
-            --secondary-container:#d0e6f3;
-            --on-secondary-container:#091e27;
-            --tertiary:#5f5a7d;
-            --on-tertiary:#ffffff;
-            --tertiary-container:#e5deff;
-            --on-tertiary-container:#1b1736;
-            --error:#ba1a1a;
-            --on-error:#ffffff;
-            --error-container:#ffdad6;
-            --on-error-container:#410002;
-            --background:#fbfcfe;
-            --on-background:#191c1e;
-            --surface:#f8f9fb;
-            --on-surface:#191c1e;
-            --surface-variant:#dce3e9;
-            --on-surface-variant:#40484c;
-            --outline:#71787d;
-            --outline-variant:#c0c7cd;
-            --shadow:#000000;
-            --scrim:#000000;
-            --inverse-surface:#2e3133;
-            --inverse-on-surface:#f0f1f3;
-            --inverse-primary:#72d2ff;
-            --surface-dim:#d9dadc;
-            --surface-bright:#f8f9fb;
-            --surface-container-lowest:#ffffff;
-            --surface-container-low:#f3f4f6;
-            --surface-container:#edeef0;
-            --surface-container-high:#e7e8ea;
-            --surface-container-highest:#e1e2e5;
+          --primary:#0061a4;
+--on-primary:#ffffff;
+--primary-container:#d1e4ff;
+--on-primary-container:#001d36;
+--secondary:#535f70;
+--on-secondary:#ffffff;
+--secondary-container:#d7e3f7;
+--on-secondary-container:#101c2b;
+--tertiary:#6b5778;
+--on-tertiary:#ffffff;
+--tertiary-container:#f2daff;
+--on-tertiary-container:#251431;
+--error:#ba1a1a;
+--on-error:#ffffff;
+--error-container:#ffdad6;
+--on-error-container:#410002;
+--background:#fdfcff;
+--on-background:#1a1c1e;
+--surface:#faf9fc;
+--on-surface:#1a1c1e;
+--surface-variant:#dfe2eb;
+--on-surface-variant:#43474e;
+--outline:#73777f;
+--outline-variant:#c3c7cf;
+--shadow:#000000;
+--scrim:#000000;
+--inverse-surface:#2f3033;
+--inverse-on-surface:#f1f0f4;
+--inverse-primary:#9ecaff;
+--surface-dim:#dadadd;
+--surface-bright:#faf9fc;
+--surface-container-lowest:#ffffff;
+--surface-container-low:#f4f3f7;
+--surface-container:#eeedf1;
+--surface-container-high:#e8e8eb;
+--surface-container-highest:#e2e2e6;
         }
     </style>
     </head>
-    <body class="dark">
+    <body class="light primary">
         
       <!--Top Bar -->
       <!--
@@ -102,6 +106,10 @@
             <a href="#About">
               <i class="fa-solid fa-user"></i>
               <span>About</span>
+            </a>
+            <a href="#More">
+              <i class="large fa-solid fa-grip-dots"></i>
+              <span>More</span>
             </a>
             <a href="#Skills">
               <i class="fa-solid fa-code"></i>
@@ -120,7 +128,7 @@
                 <span>Theme</span>
             </a>
           </nav>
-          
+          <main class="responsive">
           <!--About-->
           <article class="padding surface-container round" id="About">
             <div class="grid no-space">
@@ -131,16 +139,31 @@
                   <blockquote>
                   <p> I'm <a class="link"><b>Piyush Adlakha</b></a> an undergraduate student and tech enthusiast with a passion for development and innovation. With a foundation in backend development using PHP and Flask, I’m now diving into Android and frontend development to broaden my skills. I’m constantly driven by a curiosity for technology and a love for building efficient, impactful solutions. </p>
                 </blockquote>
+                
                 </div>
               </div>
               <div class="s6 right-align">
-                <img style="width:300px;height:300px" class="circle"  src="profile.jpg" id="profile_pic">
+                <img style="max-width:300px;max-height:300px" class="responsive"  src="profile_processed.png" id="profile_pic">
               </div>
             </div>
           </article>
 
+          <!--More -->
+          <article class="padding --surface-container round" id="More">
+            <div class="padding">
+            <h5><b>More About Me </b></h5>
+            <blockquote>
+            <p>
+              I’m currently broadening my horizons by diving into Android development and frontend technologies, aiming to become a versatile full-stack developer.What truly excites me is the endless scope of learning and creativity in the tech world. Every project I take on is an opportunity to explore, innovate, and grow. Whether it's crafting a feature-rich web application, debugging complex code, or designing seamless user interfaces, I approach challenges with curiosity and a problem-solving mindset. My portfolio reflects my dedication to mastering the nuances of software engineering and my drive to deliver excellence in every line of code.
+            </p>
+            <p>Beyond technical work, I’m an avid learner who enjoys staying up-to-date with the latest trends in software and development. Platforms like CodeChef and HackerRank allow me to sharpen my problem-solving skills and tackle algorithmic challenges, while GitHub serves as my canvas for showcasing diverse projects and collaborations.I believe that as engineers, we have a responsibility to create solutions that are both innovative and considerate of the environment. Feel free to explore my portfolio, and let’s connect to create something amazing together!
+</p></blockquote>
+</div>
+          </article>
+
           <!--Skills-->
           <article class="padding --surface-container round" id="Skills">
+            <div class="padding">
             <h5><b>I am quite acquainted with </b></h5><br>
             
             <a class="row wave"><i class="fa-2xl extra fa-brands fa-php extra"></i><span> PHP </span></a><hr>
@@ -149,41 +172,47 @@
             <a class="row wave"><i class="fa-2xl fa-brands fa-css3-alt extra"></i><span>  CSS </span></a><hr>
             <a class="row wave"><i class="fa-2xl fa-solid fa-flask extra"></i><span> Flask </span></a><hr>
             <a class="row wave"><i class="fa-2xl fa-solid fa-terminal extra"></i><span> Linux-CLI </span></a>
+          </div>
           </article>
           
 
 
           <!--Socials Page-->
           <article class="padding surface-container round" id="Socials">
+            <div class="padding">
             <h5><b>Connect with me on </b></h5><br>
   
-            <a class="row wave" href="https://linkedin.com" target="_blank"><i class="fa-2xl extra fa-brands fa-linkedin extra"></i><span> <b>Linkedin</b> </span></a><hr>
-            <a class="row wave" href="https://whatsapp.com/" target="_blank"><i class="fa-2xl fa-brands fa-whatsapp extra"></i><span> Whatsapp </span></a><hr>
-            <a class="row wave" href="https://instagram.com/" target="_blank"><i class="fa-2xl fa-brands fa-instagram extra"></i><span> Instagram </span></a><hr>
-            <a class="row wave" href="https://x.com/" target="_blank"><i class="fa-2xl fa-brands fa-x-twitter extra"></i><span>  Twitter/X </span></a><hr>
-            <a class="row wave" href="https://facebook.com" target="_blank"><i class="fa-2xl fa-brands fa-facebook extra"></i><span> Facebook </span></a><hr>
+            <a class="row wave" href="https://linkedin.com" target="_blank"><i class="fa-2xl extra fa-brands fa-linkedin extra"></i><span> Linkedin </span></a><hr>
+            <a class="row wave" href="https://api.whatsapp.com/send?phone=919818385187" target="_blank"><i class="fa-2xl fa-brands fa-whatsapp extra"></i><span> Whatsapp </span></a><hr>
+            <a class="row wave" href="https://x.com/PiyushAdy" target="_blank"><i class="fa-2xl fa-brands fa-x-twitter extra"></i><span>  Twitter/X </span></a><hr>
             <a class="row wave" href="mailto:piyushady125@gmail.com" target="_blank"><i class="fa-2xl fa-solid fa-envelope extra"></i><span> E-Mail </span></a>
-
+            </div>
           </article>
 
           <!--Profiles Page-->
           <article class="padding surface-container round" id="Profiles">
+            <div class="padding">
             <h5><b>View My Coding journey on </b></h5><br>
-            <a class="row wave" href="https://github.com" target="_blank"><i class="fa-2xl extra fa-brands fa-github-alt extra"></i><span> <b>Github</b> </span></a><hr>
-            <a class="row wave" href="https://hackerrank.com/" target="_blank"><i class="fa-2xl fa-brands fa-hackerrank extra"></i><span>HackerRank</span></a>
-           
+            <a class="row wave" href="https://github.com/PiyushAdy" target="_blank"><i class="fa-2xl extra fa-brands fa-github-alt extra"></i><span> Github </span></a><hr>
+            <a class="row wave" href="https://www.hackerrank.com/profile/piyushady125" target="_blank"><i class="fa-2xl fa-brands fa-hackerrank extra"></i><span>HackerRank</span></a><hr>
+            <a class="row wave" href="https://www.codechef.com/users/aided_spice_99" target="_blank"><i class="fa-2xl fa-solid fa-hat-chef extra"></i><span>CodeChef</span></a><hr>
+            <a class="row wave" href="https://www.codechef.com/users/aided_spice_99" target="_blank"><i class="fa-2xl fa-solid fa-chart-simple extra"></i><span>CodeForces</span></a>
+            </div>
           </article>
-          
+        </main>
+                 
           <script>
             function toggleTheme() {
               const currentTheme = document.body.getAttribute("class");
-              const newTheme = currentTheme === "light" ? "dark" : "light";
-              if (newTheme==="light"){
+              const newTheme = currentTheme === "light primary" ? "dark" : "light primary";
+              /*
+              if (newTheme==="light primary"){
                 img_src="profile_processed.png";
               }else if (newTheme==="dark"){
                 img_src="profile.jpg";
               }
               document.getElementById("profile_pic").src=img_src;
+              */
               document.body.setAttribute("class", newTheme);
             }
           </script>   
