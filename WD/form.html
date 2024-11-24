@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <style type="text/css">
+
+            .s {
+              background-color: rgba(255,255,255,0);
+              background-size:24px 24px;
+              background-repeat: no-repeat;
+              border:0;
+              border-bottom:2px solid white;
+              padding-left: 25px;
+              color:white;
+              width: 12.5rem;
+              
+            }
+            ::placeholder{
+                color:white;
+            }
+            input[type=submit] {
+                font-family:"Times New Roman";
+                color: white;
+                background-color:rgba(0,0,0,0.3);
+                border-width:5px;
+                border-color:white;
+                border-radius:15px;
+                
+            }
+          body {
+            background-image: url("https://piyushady.github.io/static/bg.jpg");
+            background-attachment: fixed;
+            background-size: cover;
+            background-repeat: no-repeat;
+            color: white;
+          }
+
+          .grad {
+            width: max-content;
+            backdrop-filter:blur(3rem);
+            border:solid;
+            border-color:rgba(255,255,255,0.7);
+            justify-content: center;
+            align-items: center;
+            border-radius: 25px;
+            border-width: 5px;
+            margin-top:5%;
+            padding-top: 0.5rem;
+            padding-bottom: 1rem;
+            padding-left: 2rem;
+            padding-right: 2rem;
+          }
+          .grad i{
+              position: absolute;
+          }
+          a{
+              text-decoration: none;
+          }
+          .credits{
+            backdrop-filter:blur(3rem);
+            border-top:solid;
+            border-color:rgba(255,255,255, 0.6);
+            justify-content: center;
+            align-items: center;
+            border-radius: 0px;
+            width: 100%;
+            padding:1rem;
+            bottom: 0;
+            position:absolute;
+          }
+              
+          
+
+        </style>
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" /> 
+        <title>Form</title>
+    </head>
+    
+      <body >
+        <center>
+        <div class="grad"><br>
+                <h3><b>Form</b></h3>
+        <form action="/submit" method="post">
+         <i class="material-symbols-rounded">person</i> 
+        <input type="Input" class="s" name="name" id="name" placeholder="Enter Your Name" ><br><br>
+        <i class="material-symbols-rounded">attach_email</i> 
+        <input type="Input" class="s" name="email" id="email" placeholder="Enter Your Email" ><br><br>
+        <i class="material-symbols-rounded">call</i>
+        <input type="text" class="s" name="phone" id="phone" placeholder="Enter Your Number" ><br><br>
+       <i class="material-symbols-rounded">sms</i>
+       <input type="Input" name="query" class="s" id="query" placeholder="Enter Your Query"><br><br>
+       <input type="submit" value="Submit" >
+       </form>
+       </div><br>
+      <div class="credits">
+  <h4>Developed By<br><a href="https://piyushady.github.io">Piyush Adlakha</a></h4></div>
+
+    </center>
+    </body>
+</html>
