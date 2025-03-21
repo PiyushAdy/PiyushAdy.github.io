@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HC-05 Bluetooth Connection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        h1 {
+            color: #333;
+        }
+        
+        .container {
+            background-color: #f5f5f5;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .status {
+            margin: 20px 0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .connected {
+            color: green;
+        }
+        
+        .disconnected {
+            color: red;
+        }
+        
+        button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            width: 80%;
+            max-width: 300px;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        #dataSection {
+            display: none;
+            margin-top: 20px;
+        }
+        
+        #receivedData {
+            width: 100%;
+            min-height: 100px;
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: white;
+            text-align: left;
+        }
+        
+        #log {
+            width: 100%;
+            height: 100px;
+            overflow-y: auto;
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            text-align: left;
+            font-family: monospace;
+            font-size: 12px;
+        }
+
+        #deviceOptions {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            text-align: left;
+            padding: 10px;
+        }
+        
+        #deviceOptions label {
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>HC-05 Bluetooth Connection</h1>
+    
+    <div class="container">
+        <p>Connect to your HC-05 Bluetooth module to communicate with Arduino</p>
+        
+        <div class="status">
+            Status: <span id="connectionStatus" class="disconnected">Disconnected</span>
+        </div>
+
+        <div id="deviceOptions">
+            <p><strong>Connection Options:</strong></p>
+            <label>
+                <input type="radio" name="discoveryMode" value="all" checked>
+                Show all Bluetooth devices
+            </label>
+            <label>
+                <input type="radio" name="discoveryMode" value="named">
+                Show only devices with names
+            </label>
+            <label>
+                <input type="radio" name="discoveryMode" value="hc05">
+                Filter for likely HC-05 devices
+            </label>
+        </div>
+        
+        <button id="connectBtn">Connect to HC-05</button>
+        
+        <div id="dataSection">
+            <button id="getDataBtn">Get Data</button>
+            <div id="receivedData">No data received yet.</div>
+        </div>
+        
+        <div id="log">Debug logs will appear here...</div>
+    </div>
+    
+    <script>
+        // Variables for Bluetooth device
+        let bluetoothDevice = null;
+        let bluetoothCharacteristic = null;
+        let buffer = '';
+        
+        // Get DOM elements
+        const connectBtn = document.getElementById('connectBtn');
+        const getDataBtn = document.getElementById('getDataBtn');
+        const connectionStatus = document.getElementById('connectionStatus');
+        const dataSection = document.getElementById('dataSection');
+        const receivedData = document.getElementById('receivedData');
+        const logElement = document.getElementById('log');
+        const discoveryOptions = document.getElementsByName('discoveryMode');
+        
+        // Common service and characteristic UUIDs
+        const SERVICE_UUIDS = [
+            '0000ffe0-0000-1000-8000-00805f9b34fb',  // Common HC-05 service UUID
+            '0000fff0-0000-1000-8000-00805f9b34fb',  // Alternative service UUID
+            '00001101-0000-1000-8000-00805f9b34fb',  // SPP UUID
+            '0000180a-0000-1000-8000-00805f9b34fb',  // Device Information
+            '00001800-0000-1000-8000-00805f9b34fb',  // Generic Access
+            '00001801-0000-1000-8000-00805f9b34fb'   // Generic Attribute
+        ];
+        
+        // Logging function
+        function log(message) {
+            console.log(message);
+            const timestamp = new Date().toLocaleTimeString();
+            logElement.innerHTML += `[${timestamp}] ${message}<br>`;
+            logElement.scrollTop = logElement.scrollHeight;
+        }
+        
+        // Clear log function
+        function clearLog() {
+            logElement.innerHTML = '';
+        }
+        
+        // Check if Web Bluetooth API is available
+        if (!navigator.bluetooth) {
+            log('Web Bluetooth API is not available in your browser.');
+            alert('Web Bluetooth API is not available in your browser. Please use Chrome or another compatible browser.');
+            connectBtn.disabled = true;
+        } else {
+            log('Web Bluetooth API is available.');
+        }
+        
+        // Get selected discovery mode
+        function getDiscoveryMode() {
+            for (const option of discoveryOptions) {
+                if (option.checked) {
+                    return option.value;
+                }
+            }
+            return 'all';
+        }
+        
+        // Connect to HC-05 Bluetooth device
+        connectBtn.addEventListener('click', async () => {
+            try {
+                clearLog();
+                log('Starting connection process...');
+                
+                // If already connected, disconnect
+                if (bluetoothDevice && bluetoothDevice.gatt.connected) {
+                    log('Disconnecting from current device...');
+                    bluetoothDevice.gatt.disconnect();
+                    return;
+                }
+                
+                // Get selected discovery mode
+                const mode = getDiscoveryMode();
+                log(`Using discovery mode: ${mode}`);
+                
+                // Configure request options based on mode
+                let requestOptions = {};
+                
+                if (mode === 'all') {
+                    // Show all Bluetooth devices with all services
+                    requestOptions = {
+                        acceptAllDevices: true,
+                        optionalServices: SERVICE_UUIDS
+                    };
+                } else if (mode === 'named') {
+                    // Show only devices that have names
+                    requestOptions = {
+                        filters: [{ namePrefix: '' }],  // Will match any device with a name
+                        optionalServices: SERVICE_UUIDS
+                    };
+                } else if (mode === 'hc05') {
+                    // Try to filter for likely HC-05 devices
+                    requestOptions = {
+                        filters: [
+                            { namePrefix: 'HC' },      // Matches HC-05, HC-06, etc.
+                            { namePrefix: 'hc' },      // Case insensitive variant
+                            { namePrefix: 'BT' },      // Some HC-05s use BT prefix
+                            { services: SERVICE_UUIDS } // Devices advertising known services
+                        ],
+                        optionalServices: SERVICE_UUIDS
+                    };
+                }
+                
+                log('Requesting Bluetooth device...');
+                log('Request options: ' + JSON.stringify(requestOptions));
+                
+                // Request Bluetooth device
+                bluetoothDevice = await navigator.bluetooth.requestDevice(requestOptions);
+                
+                log('Device selected: ' + (bluetoothDevice.name || 'Unnamed Device'));
+                
+                // Add event listener for disconnection
+                bluetoothDevice.addEventListener('gattserverdisconnected', onDisconnected);
+                
+                // Connect to GATT server
+                log('Connecting to GATT server...');
+                const server = await bluetoothDevice.gatt.connect();
+                log('Connected to GATT server');
+                
+                // Try to get one of the possible services
+                let service = null;
+                
+                // First, get all available services
+                log('Discovering services...');
+                const services = await server.getPrimaryServices();
+                log(`Found ${services.length} services`);
+                
+                for (const svc of services) {
+                    log(`Found service: ${svc.uuid}`);
+                }
+                
+                // Try to use a known service first
+                for (const uuid of SERVICE_UUIDS) {
+                    try {
+                        log('Trying to get service: ' + uuid);
+                        service = await server.getPrimaryService(uuid);
+                        log('Found service: ' + uuid);
+                        break;
+                    } catch (error) {
+                        log('Service not found: ' + uuid);
+                    }
+                }
+                
+                // If no known service found, use the first available service
+                if (!service && services.length > 0) {
+                    service = services[0];
+                    log('Using first available service: ' + service.uuid);
+                }
+                
+                if (!service) {
+                    throw new Error('No compatible service found');
+                }
+                
+                // Get characteristics
+                log('Getting characteristics...');
+                const characteristics = await service.getCharacteristics();
+                log('Found ' + characteristics.length + ' characteristics');
+                
+                // Find a characteristic that supports both read and write
+                for (const characteristic of characteristics) {
+                    const properties = characteristic.properties;
+                    let propsStr = '';
+                    if (properties.read) propsStr += 'read ';
+                    if (properties.write) propsStr += 'write ';
+                    if (properties.notify) propsStr += 'notify ';
+                    if (properties.writeWithoutResponse) propsStr += 'writeWithoutResponse ';
+                    
+                    log('Characteristic ' + characteristic.uuid + ' properties: ' + propsStr);
+                    
+                    // Prefer characteristics with write and read/notify
+                    if ((properties.write || properties.writeWithoutResponse) && 
+                        (properties.read || properties.notify)) {
+                        bluetoothCharacteristic = characteristic;
+                        log('Using characteristic: ' + characteristic.uuid);
+                        break;
+                    }
+                }
+                
+                if (!bluetoothCharacteristic && characteristics.length > 0) {
+                    // Just use the first characteristic if no ideal one found
+                    bluetoothCharacteristic = characteristics[0];
+                    log('Fallback to characteristic: ' + bluetoothCharacteristic.uuid);
+                }
+                
+                if (!bluetoothCharacteristic) {
+                    throw new Error('No usable characteristic found');
+                }
+                
+                // Start notifications if available
+                if (bluetoothCharacteristic.properties.notify) {
+                    log('Starting notifications...');
+                    await bluetoothCharacteristic.startNotifications();
+                    bluetoothCharacteristic.addEventListener('characteristicvaluechanged', handleCharacteristicValueChanged);
+                    log('Notifications started');
+                } else {
+                    log('Notifications not supported by this characteristic');
+                }
+                
+                // Update UI for connected state
+                connectionStatus.textContent = 'Connected to ' + (bluetoothDevice.name || 'Unnamed Device');
+                connectionStatus.className = 'connected';
+                connectBtn.textContent = 'Disconnect';
+                dataSection.style.display = 'block';
+                
+            } catch (error) {
+                log('Error: ' + error.message);
+                console.error('Bluetooth connection failed:', error);
+                alert('Failed to connect: ' + error.message);
+            }
+        });
+        
+        // Handle disconnect event
+        function onDisconnected() {
+            log('Bluetooth device disconnected');
+            connectionStatus.textContent = 'Disconnected';
+            connectionStatus.className = 'disconnected';
+            connectBtn.textContent = 'Connect to HC-05';
+            dataSection.style.display = 'none';
+            bluetoothDevice = null;
+            bluetoothCharacteristic = null;
+        }
+        
+        // Handle receiving data from Arduino
+        function handleCharacteristicValueChanged(event) {
+            const value = event.target.value;
+            const decoder = new TextDecoder('utf-8');
+            const receivedText = decoder.decode(value);
+            
+            // Append to buffer (in case data comes in fragments)
+            buffer += receivedText;
+            
+            log('Received data: ' + receivedText);
+            
+            // Display received data
+            receivedData.textContent = buffer;
+            
+            // Send data to API
+            sendDataToAPI(buffer);
+        }
+        
+        // Send data to API
+        function sendDataToAPI(data) {
+            log('Sending to API: ' + data);
+            fetch('https://your-api-endpoint.com/data', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ data: data }),
+            })
+            .then(response => response.json())
+            .then(result => {
+                log('API response received');
+                console.log('API response:', result);
+            })
+            .catch(error => {
+                log('API error: ' + error.message);
+                console.error('API error:', error);
+            });
+        }
+        
+        // Send "S" command to Arduino to get data
+        getDataBtn.addEventListener('click', async () => {
+            if (bluetoothCharacteristic) {
+                try {
+                    // Clear buffer for new data
+                    buffer = '';
+                    
+                    // Create text encoder
+                    const encoder = new TextEncoder();
+                    // Convert string to Uint8Array
+                    const data = encoder.encode('S');
+                    
+                    log('Sending "S" command...');
+                    
+                    // Send the data using the appropriate method
+                    if (bluetoothCharacteristic.properties.writeWithoutResponse) {
+                        await bluetoothCharacteristic.writeValueWithoutResponse(data);
+                        log('Sent command using writeWithoutResponse');
+                    } else if (bluetoothCharacteristic.properties.write) {
+                        await bluetoothCharacteristic.writeValue(data);
+                        log('Sent command using writeValue');
+                    } else {
+                        throw new Error('Characteristic does not support writing');
+                    }
+                    
+                    receivedData.textContent = "Waiting for data...";
+                    
+                    // If the device doesn't support notifications, manually read after a delay
+                    if (!bluetoothCharacteristic.properties.notify && bluetoothCharacteristic.properties.read) {
+                        log('No notifications support, will read manually after delay');
+                        setTimeout(async () => {
+                            try {
+                                log('Reading response...');
+                                const response = await bluetoothCharacteristic.readValue();
+                                const decoder = new TextDecoder('utf-8');
+                                const receivedText = decoder.decode(response);
+                                
+                                log('Read data: ' + receivedText);
+                                receivedData.textContent = receivedText;
+                                sendDataToAPI(receivedText);
+                            } catch (error) {
+                                log('Error reading response: ' + error.message);
+                            }
+                        }, 1000); // Wait 1 second before reading
+                    }
+                } catch (error) {
+                    log('Error sending data: ' + error.message);
+                    console.error('Error sending data:', error);
+                    alert('Failed to send data: ' + error.message);
+                }
+            } else {
+                log('Not connected to Bluetooth device');
+                alert('Not connected to Bluetooth device');
+            }
+        });
+    </script>
+</body>
+</html>
