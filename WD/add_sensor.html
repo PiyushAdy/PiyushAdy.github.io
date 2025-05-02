@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Make sure to replace plant_name with the actual name -->
+    <title>FarmSense AI | Sensor Data for {{ plant_name | default('Plant') }}</title>
+    <style>
+        /* --- CSS Variables (Themes) --- */
+        :root {
+            --primary: #2e7d32;
+            --primary-light: #4caf50;
+            --primary-dark: #1b5e20;
+            --secondary: #81c784;
+            --text: #212121;
+            --text-light: #757575;
+            --background: #f5f7f1;
+            --card-bg: #ffffff;
+            --card-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            --header-gradient: linear-gradient(135deg, #2e7d32, #66bb6a);
+            --modal-overlay: rgba(0, 0, 0, 0.5);
+            --input-border: #ccc;
+            --primary-rgb: 46, 125, 50; /* RGB for primary color */
+            --status-connecting: #ff9800; /* Orange */
+            --status-connected: #4caf50; /* Green */
+            --status-error: #f44336; /* Red */
+            --status-disconnected: #757575; /* Grey */
+        }
+
+        [data-theme="dark"] {
+            --primary: #4caf50;
+            --primary-light: #81c784;
+            --primary-dark: #2e7d32;
+            --secondary: #388e3c;
+            --text: #e0e0e0;
+            --text-light: #b0b0b0;
+            --background: #1a1e1b;
+            --card-bg: #2d332e;
+            --card-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+            --header-gradient: linear-gradient(135deg, #1b5e20, #2e7d32);
+            --modal-overlay: rgba(0, 0, 0, 0.7);
+            --input-border: #555;
+            --primary-rgb: 76, 175, 80; /* RGB for dark theme primary */
+            --status-connecting: #ffa726;
+            --status-connected: #66bb6a;
+            --status-error: #ef5350;
+            --status-disconnected: #bdbdbd;
+        }
+
+        /* --- Global Styles --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        /* --- Header (Copied from plant_dashboard.html) --- */
+        header {
+            background: var(--header-gradient);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .header-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; font-size: 1.5rem; font-weight: 700; color: white; text-decoration: none; }
+        .logo svg { margin-right: 10px; fill: white; }
+        .logo span { display: inline-block; }
+        .theme-switch { position: relative; width: 60px; height: 30px; margin-left: 15px; }
+        .theme-switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 30px; }
+        .slider:before { position: absolute; content: ""; height: 22px; width: 22px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background-color: #555; }
+        input:checked + .slider:before { transform: translateX(30px); }
+        .theme-icon { position: absolute; top: 50%; transform: translateY(-50%); font-size: 14px; transition: opacity .4s; pointer-events: none; }
+        .sun-icon { left: 8px; color: #f9a825; opacity: 1; }
+        .moon-icon { right: 8px; color: #e0e0e0; opacity: 0; }
+        input:checked ~ .slider .sun-icon { opacity: 0; }
+        input:checked ~ .slider .moon-icon { opacity: 1; }
+        nav { display: flex; align-items: center; }
+        .user-profile { display: flex; align-items: center; }
+        .user-avatar { width: 40px; height: 40px; border-radius: 50%; background-color: var(--secondary); display: flex; align-items: center; justify-content: center; margin-right: 10px; color: white; font-weight: bold; font-size: 1.1rem; flex-shrink: 0; }
+        .user-info { line-height: 1.2; }
+        .user-name { font-weight: 500; white-space: nowrap; }
+
+
+        /* --- Main Content --- */
+        main {
+            margin-top: 70px; /* Height of fixed header */
+            flex: 1;
+            padding: 40px 0;
+        }
+
+        /* --- Sensor Page Header --- */
+        .sensor-page-header {
+            background-color: var(--card-bg);
+            padding: 25px 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: var(--card-shadow);
+            display: flex;
+            flex-direction: column; /* Stack title and connection */
+            gap: 20px;
+        }
+        .sensor-page-header h1 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 5px; /* Reduced margin */
+            text-align: center; /* Center title */
+        }
+        .plant-id-display {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            text-align: center; /* Center ID */
+            margin-bottom: 15px; /* Space below ID */
+        }
+
+        /* --- Connection Area --- */
+        .connection-area {
+            display: flex;
+            flex-wrap: wrap; /* Allow wrapping */
+            justify-content: center; /* Center items */
+            align-items: center;
+            gap: 15px;
+            padding: 15px 0;
+            border-top: 1px solid var(--input-border);
+            margin-top: 15px;
+        }
+        #connect-button, #disconnect-button {
+            min-width: 180px; /* Give buttons some width */
+        }
+        #disconnect-button {
+            background-color: var(--status-error);
+            border-color: var(--status-error);
+            color: white;
+        }
+        #disconnect-button:hover {
+            background-color: #d32f2f; /* Darker red */
+            border-color: #d32f2f;
+        }
+        #status-message {
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 20px;
+            background-color: var(--status-disconnected); /* Default */
+            color: white;
+            text-align: center;
+            min-width: 150px; /* Ensure status has width */
+            transition: background-color 0.3s ease;
+        }
+         #status-message.connecting { background-color: var(--status-connecting); }
+         #status-message.connected { background-color: var(--status-connected); }
+         #status-message.error { background-color: var(--status-error); }
+         #status-message.disconnected { background-color: var(--status-disconnected); color: var(--text); } /* Different style for disconnected */
+         [data-theme="dark"] #status-message.disconnected { color: white; }
+
+
+        /* --- Sensor Data Display Grid --- */
+        .sensor-data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Responsive grid */
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .sensor-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 25px 20px;
+            box-shadow: var(--card-shadow);
+            text-align: center;
+            border-left: 5px solid var(--primary); /* Accent border */
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .sensor-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+        }
+        [data-theme="dark"] .sensor-card:hover {
+             box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+        }
+
+        .sensor-card h3 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        .sensor-card h3 svg {
+            margin-right: 10px;
+            width: 22px;
+            height: 22px;
+            color: var(--primary);
+        }
+        .sensor-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+            line-height: 1.2;
+        }
+        .sensor-unit {
+            font-size: 1rem;
+            color: var(--text-light);
+        }
+        /* Specific border colors */
+        .sensor-card.moisture { border-left-color: #2196f3; } /* Blue */
+        .sensor-card.moisture h3 svg { color: #2196f3; }
+        .sensor-card.moisture .sensor-value { color: #2196f3; }
+
+        .sensor-card.light { border-left-color: #ffc107; } /* Amber */
+        .sensor-card.light h3 svg { color: #ffc107; }
+        .sensor-card.light .sensor-value { color: #ffc107; }
+
+        .sensor-card.temperature { border-left-color: #f44336; } /* Red */
+        .sensor-card.temperature h3 svg { color: #f44336; }
+        .sensor-card.temperature .sensor-value { color: #f44336; }
+
+        .sensor-card.humidity { border-left-color: #00bcd4; } /* Cyan */
+        .sensor-card.humidity h3 svg { color: #00bcd4; }
+        .sensor-card.humidity .sensor-value { color: #00bcd4; }
+
+        /* --- Save Data Area --- */
+        .save-data-area {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+        }
+        #save-data-button {
+             min-width: 200px;
+        }
+        #save-status {
+             display: block;
+             margin-top: 15px;
+             font-size: 0.9rem;
+             color: var(--text-light);
+             min-height: 1.5em; /* Reserve space */
+        }
+
+        /* --- Buttons (Copied and slightly adjusted from plant_dashboard.html) --- */
+        .btn {
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid transparent;
+            line-height: 1.4;
+            white-space: nowrap;
+        }
+        .btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+            box-shadow: none;
+            transform: none;
+        }
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        .btn-primary:not(:disabled):hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        .btn-outline:not(:disabled):hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+         .btn svg {
+             margin-right: 8px;
+             width: 18px;
+             height: 18px;
+             vertical-align: middle;
+         }
+
+        /* --- Footer (Copied from plant_dashboard.html) --- */
+        footer {
+            background-color: var(--primary-dark);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 25px 0;
+            margin-top: auto;
+        }
+        .footer-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
+        .footer-links { display: flex; gap: 25px; }
+        .footer-links a { color: rgba(255, 255, 255, 0.8); text-decoration: none; transition: color 0.3s ease; }
+        .footer-links a:hover { color: white; text-decoration: underline; }
+
+        /* --- Responsive Adjustments --- */
+        @media (max-width: 768px) {
+             .header-content { padding: 0 15px; }
+             .logo span { display: none; }
+             .user-profile { display: none; }
+             main { padding: 30px 0; margin-top: 65px; }
+             .sensor-page-header { padding: 20px; }
+             .sensor-page-header h1 { font-size: 1.8rem; }
+             .connection-area { flex-direction: column; gap: 10px; } /* Stack connect elements */
+             .sensor-data-grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; }
+             .sensor-card { padding: 20px 15px; }
+             .sensor-value { font-size: 2rem; }
+             .btn { padding: 10px 20px; font-size: 0.9rem; }
+        }
+         @media (max-width: 576px) {
+            .sensor-data-grid { grid-template-columns: 1fr; } /* Single column on very small screens */
+            .footer-content { flex-direction: column; gap: 15px; text-align: center; }
+            .footer-links { gap: 15px; justify-content: center; }
+         }
+    </style>
+</head>
+<body>
+    <!-- Header (Same as plant_dashboard.html) -->
+    <header>
+        <div class="container header-content">
+            <a href="/" class="logo">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                   <title>FarmSense AI Logo</title>
+                   <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm6 14.88c-1.07.7-2.32 1.12-3.66 1.12-1.34 0-2.59-.42-3.66-1.12-.3-.19-.64-.3-.98-.3s-.68.11-.98.3C7.65 17.5 6 18.86 6 20.5c0 .83.67 1.5 1.5 1.5h9c.83 0 1.5-.67 1.5-1.5 0-1.64-1.65-3-2.72-3.12zm-6-3.88c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm6 0c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-6-7c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm6 0c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z"/>
+                 </svg>
+                <span>FarmSense AI</span>
+            </a>
+            <nav>
+                <div class="user-profile">
+                    <!-- Placeholder: Replace with actual user data if available -->
+                    <div class="user-avatar">U</div>
+                    <div class="user-info">
+                        <div class="user-name">User Name</div>
+                    </div>
+                </div>
+                <label class="theme-switch" aria-label="Toggle theme">
+                    <input type="checkbox" id="theme-toggle">
+                    <span class="slider">
+                        <span class="theme-icon sun-icon" aria-hidden="true">☀️</span>
+                        <span class="theme-icon moon-icon" aria-hidden="true">🌙</span>
+                    </span>
+                </label>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+
+            <!-- Page Header & Connection -->
+            <section class="sensor-page-header">
+                <h1>Live Sensor Data</h1>
+                <div class="plant-id-display">Plant: {{ plant_name | default('N/A') }} (ID: {{ plant_id | default('N/A') }})</div>
+
+                <div class="connection-area">
+                    <button id="connect-button" class="btn btn-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-2.5a.5.5 0 0 1 0-1H17a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1h-2.5a.5.5 0 0 1 0-1H17a1 1 0 0 0 1-1V5Z"></path></svg>
+                        Connect to Sensor
+                    </button>
+                     <button id="disconnect-button" class="btn" style="display: none;">
+                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                        Disconnect
+                    </button>
+                    <div id="status-message" class="disconnected" aria-live="polite">Disconnected</div>
+                </div>
+            </section>
+
+            <!-- Sensor Data Grid -->
+            <section class="sensor-data-grid" aria-label="Sensor Readings">
+                <div class="sensor-card moisture">
+                    <h3>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l.34.66 8.34 16.01-1.41 1.41-8.27-8.27-8.27 8.27L1.34 19.36 9.66 3.35l.34-.66z"/><path d="M12 17.5a2.5 2.5 0 0 0 0-5 2.5 2.5 0 0 0 0 5z"/></svg>
+                        Moisture
+                    </h3>
+                    <div class="sensor-value" id="moisture-value">--</div>
+                    <div class="sensor-unit">%</div>
+                </div>
+                <div class="sensor-card light">
+                    <h3>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+                        Light
+                    </h3>
+                    <div class="sensor-value" id="light-value">--</div>
+                    <div class="sensor-unit">%</div>
+                </div>
+                <div class="sensor-card temperature">
+                    <h3>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/></svg>
+                        Temperature
+                    </h3>
+                    <div class="sensor-value" id="temp-value">--</div>
+                    <div class="sensor-unit">°C</div>
+                </div>
+                <div class="sensor-card humidity">
+                    <h3>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 14a4 4 0 0 0 4-4c0-2.21-1.79-4-4-4S8 7.79 8 10a4 4 0 0 0 4 4Z"/><path d="M14.12 16.88a10 10 0 0 1-4.24 0"/><path d="M17.66 13.34a6 6 0 0 1-1.17 1.17"/><path d="M6.34 13.34a6 6 0 0 1 1.17-1.17"/><path d="M14.83 9.17a6 6 0 0 1 1.17 1.17"/><path d="M7.5 10.34a6 6 0 0 1-1.17-1.17"/><path d="M12 20a8 8 0 0 0 5.66-2.34l-1.42-1.42a6 6 0 0 1-8.48 0L6.34 17.66A8 8 0 0 0 12 20Z"/></svg>
+                        Humidity
+                    </h3>
+                    <div class="sensor-value" id="humidity-value">--</div>
+                    <div class="sensor-unit">%</div>
+                </div>
+            </section>
+
+            <!-- Save Data Area -->
+            <section class="save-data-area">
+                 <form id="save-data-form" action="/{{ plant_id }}/sensor" method="POST">
+                     <!-- Hidden input to store the JSON data -->
+                     <input type="hidden" id="sensor-data-json" name="sensor_data">
+                     <button id="save-data-button" type="button" class="btn btn-primary" disabled>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                        Save Sensor Data
+                     </button>
+                 </form>
+                 <span id="save-status">Connect to sensor and receive data to enable saving.</span>
+            </section>
+
+        </div> <!-- End Container -->
+    </main>
+
+    <!-- Footer (Same as plant_dashboard.html) -->
+    <footer>
+        <div class="container footer-content">
+            <p>© 2024 FarmSense AI. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Theme Toggle Logic (Copied from plant_dashboard.html) ---
+            const themeToggle = document.getElementById('theme-toggle');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+            function applyTheme(theme) {
+                if (theme === 'dark') {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    if (themeToggle) themeToggle.checked = true;
+                } else {
+                    document.documentElement.removeAttribute('data-theme');
+                    if (themeToggle) themeToggle.checked = false;
+                }
+            }
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) { applyTheme(savedTheme); }
+            else { applyTheme(prefersDark.matches ? 'dark' : 'light'); }
+            if (themeToggle) {
+                themeToggle.addEventListener('change', function() {
+                    const newTheme = this.checked ? 'dark' : 'light';
+                    applyTheme(newTheme);
+                    localStorage.setItem('theme', newTheme);
+                });
+            }
+            prefersDark.addEventListener('change', (e) => {
+                if (!localStorage.getItem('theme')) {
+                    applyTheme(e.matches ? 'dark' : 'light');
+                }
+            });
+
+            // --- Web Bluetooth Logic ---
+            const connectButton = document.getElementById('connect-button');
+            const disconnectButton = document.getElementById('disconnect-button');
+            const statusMessage = document.getElementById('status-message');
+            const moistureValueEl = document.getElementById('moisture-value');
+            const lightValueEl = document.getElementById('light-value');
+            const tempValueEl = document.getElementById('temp-value');
+            const humidityValueEl = document.getElementById('humidity-value');
+            const saveDataButton = document.getElementById('save-data-button');
+            const saveDataForm = document.getElementById('save-data-form');
+            const sensorDataJsonInput = document.getElementById('sensor-data-json');
+            const saveStatusEl = document.getElementById('save-status');
+
+            let bluetoothDevice = null;
+            let dataCharacteristic = null;
+            let latestValidData = null; // Store the last valid JSON object
+            let receivedDataBuffer = ''; // Buffer for incoming data chunks
+
+             // --- IMPORTANT: UUIDs for HC-05/Serial Port Profile ---
+            // Standard Serial Port Profile UUID (often used by HC-05) IS NOT DIRECTLY supported by Web Bluetooth.
+            // You usually need a BLE module acting as a bridge (like HM-10, ESP32)
+            // Common UART service UUIDs used by such modules:
+            const UART_SERVICE_UUID = '0000ffe0-0000-1000-8000-00805f9b34fb'; // Example: Common for HM-10 etc.
+            const UART_RX_CHARACTERISTIC_UUID = '0000ffe1-0000-1000-8000-00805f9b34fb'; // Example: Often used for RX/Notify
+
+            // You MIGHT need to change these UUIDs based on your specific module's firmware/configuration!
+            // Check your module's documentation.
+
+            function updateStatus(message, type = 'disconnected') {
+                statusMessage.textContent = message;
+                statusMessage.className = type; // Add class for styling
+                console.log(`Status: ${message} (${type})`); // Log status
+            }
+
+            function updateSensorDisplay(data) {
+                 // Basic validation
+                if (typeof data.moisture === 'number' &&
+                    typeof data.light === 'number' &&
+                    typeof data.temp === 'number' &&
+                    typeof data.humidity === 'number')
+                {
+                    moistureValueEl.textContent = data.moisture.toFixed(0); // No decimals for %
+                    lightValueEl.textContent = data.light.toFixed(0);      // No decimals for %
+                    tempValueEl.textContent = data.temp.toFixed(2);      // Two decimals for temp
+                    humidityValueEl.textContent = data.humidity.toFixed(0); // No decimals for %
+
+                    latestValidData = data; // Store the valid data object
+                    sensorDataJsonInput.value = JSON.stringify(latestValidData); // Update hidden input
+                    saveDataButton.disabled = false; // Enable save button
+                    saveStatusEl.textContent = 'Data received. Ready to save.';
+                } else {
+                     console.warn("Received data object is missing expected fields:", data);
+                     saveStatusEl.textContent = 'Received invalid data format.';
+                }
+            }
+
+            function handleNotifications(event) {
+                const value = event.target.value; // This is a DataView
+                const decoder = new TextDecoder('utf-8');
+                const receivedString = decoder.decode(value);
+                //console.log('Raw data received:', receivedString); // Debugging
+
+                receivedDataBuffer += receivedString;
+
+                // Process buffer looking for complete JSON objects (assuming newline delimited)
+                let newlineIndex;
+                while ((newlineIndex = receivedDataBuffer.indexOf('\n')) !== -1) {
+                    const jsonString = receivedDataBuffer.substring(0, newlineIndex).trim();
+                    receivedDataBuffer = receivedDataBuffer.substring(newlineIndex + 1);
+
+                    if (jsonString) {
+                        try {
+                            const jsonData = JSON.parse(jsonString);
+                             console.log('Parsed JSON:', jsonData); // Log successfully parsed JSON
+                             updateSensorDisplay(jsonData);
+                        } catch (error) {
+                            console.error('Error parsing JSON:', error, 'Received chunk:', jsonString);
+                             saveStatusEl.textContent = 'Error parsing received data.';
+                        }
+                    }
+                }
+                 // If buffer still has content without newline, keep it for the next chunk
+                 // Optional: Add a timeout or max buffer size check here if needed
+            }
+
+             function onDisconnected() {
+                console.log('> Bluetooth Device disconnected');
+                updateStatus('Disconnected', 'disconnected');
+                bluetoothDevice = null;
+                dataCharacteristic = null;
+                latestValidData = null;
+                sensorDataJsonInput.value = '';
+                saveDataButton.disabled = true; // Disable save on disconnect
+                connectButton.style.display = 'inline-flex';
+                disconnectButton.style.display = 'none';
+                 saveStatusEl.textContent = 'Disconnected. Connect to sensor to save data.';
+                 // Reset values to '--'
+                 moistureValueEl.textContent = '--';
+                 lightValueEl.textContent = '--';
+                 tempValueEl.textContent = '--';
+                 humidityValueEl.textContent = '--';
+            }
+
+            async function connectDevice() {
+                if (!navigator.bluetooth) {
+                    updateStatus('Web Bluetooth not supported!', 'error');
+                    alert('Web Bluetooth API is not available in your browser. Please use a compatible browser (like Chrome on Desktop/Android) and ensure the page is served over HTTPS.');
+                    return;
+                }
+
+                updateStatus('Requesting device...', 'connecting');
+                try {
+                    bluetoothDevice = await navigator.bluetooth.requestDevice({
+                        // filters: [{ services: [UART_SERVICE_UUID] }] // More specific filter
+                         acceptAllDevices: true, // Start broader if UUID is unsure
+                         optionalServices: [UART_SERVICE_UUID] // Request access to the service
+                    });
+
+                    if (!bluetoothDevice.gatt) {
+                         throw new Error("GATT Server not available.");
+                    }
+
+                    updateStatus(`Connecting to ${bluetoothDevice.name || 'device'}...`, 'connecting');
+                    bluetoothDevice.addEventListener('gattserverdisconnected', onDisconnected);
+                    const server = await bluetoothDevice.gatt.connect();
+
+                    updateStatus('Getting Service...', 'connecting');
+                    const service = await server.getPrimaryService(UART_SERVICE_UUID);
+
+                    updateStatus('Getting Characteristic...', 'connecting');
+                    dataCharacteristic = await service.getCharacteristic(UART_RX_CHARACTERISTIC_UUID);
+
+                    updateStatus('Starting Notifications...', 'connecting');
+                    await dataCharacteristic.startNotifications();
+                    dataCharacteristic.addEventListener('characteristicvaluechanged', handleNotifications);
+
+                    updateStatus(`Connected to ${bluetoothDevice.name || 'device'}`, 'connected');
+                    connectButton.style.display = 'none';
+                    disconnectButton.style.display = 'inline-flex';
+                    receivedDataBuffer = ''; // Clear buffer on new connection
+                    saveStatusEl.textContent = 'Connected. Waiting for data...';
+
+                } catch (error) {
+                    console.error('Bluetooth connection error:', error);
+                    updateStatus(`Connection Failed: ${error.message}`, 'error');
+                    if (bluetoothDevice && bluetoothDevice.gatt && bluetoothDevice.gatt.connected) {
+                        bluetoothDevice.gatt.disconnect(); // Attempt cleanup
+                    }
+                     onDisconnected(); // Reset state
+                }
+            }
+
+             function disconnectDevice() {
+                if (bluetoothDevice && bluetoothDevice.gatt && bluetoothDevice.gatt.connected) {
+                     updateStatus('Disconnecting...', 'connecting');
+                     if (dataCharacteristic) {
+                         dataCharacteristic.stopNotifications()
+                             .then(() => {
+                                 dataCharacteristic.removeEventListener('characteristicvaluechanged', handleNotifications);
+                                 console.log('> Notifications stopped');
+                                 bluetoothDevice.gatt.disconnect();
+                             })
+                             .catch(error => {
+                                 console.error('Error stopping notifications:', error);
+                                 // Still try to disconnect even if stopping notifications fails
+                                 bluetoothDevice.gatt.disconnect();
+                             });
+                     } else {
+                         bluetoothDevice.gatt.disconnect();
+                     }
+                } else {
+                    console.log("No device connected or already disconnecting.");
+                     onDisconnected(); // Ensure UI is reset if called unexpectedly
+                }
+            }
+
+             async function saveData() {
+                 if (!latestValidData) {
+                     alert('No valid sensor data received yet.');
+                     saveStatusEl.textContent = 'Cannot save - no valid data.';
+                     return;
+                 }
+
+                 saveDataButton.disabled = true;
+                 saveStatusEl.textContent = 'Saving data...';
+
+                 // The form's action and method are already set.
+                 // We just need to ensure the hidden input has the latest data (already done in updateSensorDisplay)
+                 // Then programmatically submit the form.
+
+                 // Alternatively, use fetch API:
+                 const postUrl = saveDataForm.action; // Get URL from form action
+                 const plantId = "{{ plant_id | default('') }}"; // Get plant_id from Jinja
+
+                 // Make sure plant_id is valid before constructing URL
+                 if (!plantId) {
+                      console.error("Plant ID is missing. Cannot save data.");
+                      alert("Error: Plant ID is missing. Cannot save data.");
+                      saveStatusEl.textContent = 'Save failed: Missing Plant ID.';
+                      saveDataButton.disabled = false; // Re-enable button
+                      return;
+                 }
+
+                 const finalPostUrl = `/${plantId}/sensor`; // Construct the final URL correctly
+
+                 try {
+                     const response = await fetch(finalPostUrl, {
+                         method: 'POST',
+                         headers: {
+                             'Content-Type': 'application/json',
+                             // Add any other headers if needed (like CSRF token if applicable)
+                         },
+                         body: JSON.stringify(latestValidData) // Send the JS object directly
+                     });
+
+                     if (response.ok) {
+                         console.log('Data saved successfully!');
+                         saveStatusEl.textContent = 'Data saved successfully!';
+                         // Optionally, disable save button again until new data arrives?
+                         // saveDataButton.disabled = true;
+                     } else {
+                         console.error('Failed to save data:', response.status, response.statusText);
+                         const errorText = await response.text(); // Get error details from server if available
+                         saveStatusEl.textContent = `Save failed: ${response.statusText} ${errorText ? `(${errorText})` : ''}`;
+                         saveDataButton.disabled = false; // Re-enable on failure
+                     }
+                 } catch (error) {
+                     console.error('Error sending save request:', error);
+                     saveStatusEl.textContent = `Save failed: Network error (${error.message})`;
+                     saveDataButton.disabled = false; // Re-enable on failure
+                 }
+             }
+
+            // --- Event Listeners ---
+            connectButton.addEventListener('click', connectDevice);
+            disconnectButton.addEventListener('click', disconnectDevice);
+            saveDataButton.addEventListener('click', saveData); // Trigger fetch on button click
+
+        }); // End DOMContentLoaded
+    </script>
+
+</body>
+</html>
