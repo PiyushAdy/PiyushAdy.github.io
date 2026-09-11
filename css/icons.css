@@ -1,0 +1,571 @@
+@font-face {
+  font-family: "AppIcons";
+  font-style: normal;
+  font-weight: 900;
+  font-display: block;
+  src: url("../fonts/icons-solid.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "AppBrands";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("../fonts/icons-brands.woff2") format("woff2");
+}
+
+/*!
+ * Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ * Copyright 2023 Fonticons, Inc.
+ */
+.icon {
+  font-family: var(--icon-style-family, "AppIcons");
+  font-weight: var(--icon-style, 900); }
+
+.icon,
+.icon-classic,
+.icon-sharp,
+.fas,
+.icon-solid,
+.far,
+.icon-regular,
+.fab,
+.icon-brands {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: var(--icon-display, inline-block);
+  font-style: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-rendering: auto; }
+
+.fas,
+.icon-classic,
+.icon-solid,
+.far,
+.icon-regular {
+  font-family: 'AppIcons'; }
+
+.fab,
+.icon-brands {
+  font-family: 'AppBrands'; }
+
+.icon-1x {
+  font-size: 1em; }
+
+.icon-2x {
+  font-size: 2em; }
+
+.icon-3x {
+  font-size: 3em; }
+
+.icon-4x {
+  font-size: 4em; }
+
+.icon-5x {
+  font-size: 5em; }
+
+.icon-6x {
+  font-size: 6em; }
+
+.icon-7x {
+  font-size: 7em; }
+
+.icon-8x {
+  font-size: 8em; }
+
+.icon-9x {
+  font-size: 9em; }
+
+.icon-10x {
+  font-size: 10em; }
+
+.icon-2xs {
+  font-size: 0.625em;
+  line-height: 0.1em;
+  vertical-align: 0.225em; }
+
+.icon-xs {
+  font-size: 0.75em;
+  line-height: 0.08333em;
+  vertical-align: 0.125em; }
+
+.icon-sm {
+  font-size: 0.875em;
+  line-height: 0.07143em;
+  vertical-align: 0.05357em; }
+
+.icon-lg {
+  font-size: 1.25em;
+  line-height: 0.05em;
+  vertical-align: -0.075em; }
+
+.icon-xl {
+  font-size: 1.5em;
+  line-height: 0.04167em;
+  vertical-align: -0.125em; }
+
+.icon-2xl {
+  font-size: 2em;
+  line-height: 0.03125em;
+  vertical-align: -0.1875em; }
+
+.icon-fw {
+  text-align: center;
+  width: 1.25em; }
+
+.icon-ul {
+  list-style-type: none;
+  margin-left: var(--icon-li-margin, 2.5em);
+  padding-left: 0; }
+  .icon-ul > li {
+    position: relative; }
+
+.icon-li {
+  left: calc(var(--icon-li-width, 2em) * -1);
+  position: absolute;
+  text-align: center;
+  width: var(--icon-li-width, 2em);
+  line-height: inherit; }
+
+.icon-border {
+  border-color: var(--icon-border-color, #eee);
+  border-radius: var(--icon-border-radius, 0.1em);
+  border-style: var(--icon-border-style, solid);
+  border-width: var(--icon-border-width, 0.08em);
+  padding: var(--icon-border-padding, 0.2em 0.25em 0.15em); }
+
+.icon-pull-left {
+  float: left;
+  margin-right: var(--icon-pull-margin, 0.3em); }
+
+.icon-pull-right {
+  float: right;
+  margin-left: var(--icon-pull-margin, 0.3em); }
+
+.icon-beat {
+  -webkit-animation-name: fa-beat;
+          animation-name: fa-beat;
+  -webkit-animation-delay: var(--icon-animation-delay, 0s);
+          animation-delay: var(--icon-animation-delay, 0s);
+  -webkit-animation-direction: var(--icon-animation-direction, normal);
+          animation-direction: var(--icon-animation-direction, normal);
+  -webkit-animation-duration: var(--icon-animation-duration, 1s);
+          animation-duration: var(--icon-animation-duration, 1s);
+  -webkit-animation-iteration-count: var(--icon-animation-iteration-count, infinite);
+          animation-iteration-count: var(--icon-animation-iteration-count, infinite);
+  -webkit-animation-timing-function: var(--icon-animation-timing, ease-in-out);
+          animation-timing-function: var(--icon-animation-timing, ease-in-out); }
+
+.icon-bounce {
+  -webkit-animation-name: fa-bounce;
+          animation-name: fa-bounce;
+  -webkit-animation-delay: var(--icon-animation-delay, 0s);
+          animation-delay: var(--icon-animation-delay, 0s);
+  -webkit-animation-direction: var(--icon-animation-direction, normal);
+          animation-direction: var(--icon-animation-direction, normal);
+  -webkit-animation-duration: var(--icon-animation-duration, 1s);
+          animation-duration: var(--icon-animation-duration, 1s);
+  -webkit-animation-iteration-count: var(--icon-animation-iteration-count, infinite);
+          animation-iteration-count: var(--icon-animation-iteration-count, infinite);
+  -webkit-animation-timing-function: var(--icon-animation-timing, cubic-bezier(0.28, 0.84, 0.42, 1));
+          animation-timing-function: var(--icon-animation-timing, cubic-bezier(0.28, 0.84, 0.42, 1)); }
+
+.icon-fade {
+  -webkit-animation-name: fa-fade;
+          animation-name: fa-fade;
+  -webkit-animation-delay: var(--icon-animation-delay, 0s);
+          animation-delay: var(--icon-animation-delay, 0s);
+  -webkit-animation-direction: var(--icon-animation-direction, normal);
+          animation-direction: var(--icon-animation-direction, normal);
+  -webkit-animation-duration: var(--icon-animation-duration, 1s);
+          animation-duration: var(--icon-animation-duration, 1s);
+  -webkit-animation-iteration-count: var(--icon-animation-iteration-count, infinite);
+          animation-iteration-count: var(--icon-animation-iteration-count, infinite);
+  -webkit-animation-timing-function: var(--icon-animation-timing, cubic-bezier(0.4, 0, 0.6, 1));
+          animation-timing-function: var(--icon-animation-timing, cubic-bezier(0.4, 0, 0.6, 1)); }
+
+.icon-beat-fade {
+  -webkit-animation-name: fa-beat-fade;
+          animation-name: fa-beat-fade;
+  -webkit-animation-delay: var(--icon-animation-delay, 0s);
+          animation-delay: var(--icon-animation-delay, 0s);
+  -webkit-animation-direction: var(--icon-animation-direction, normal);
+          animation-direction: var(--icon-animation-direction, normal);
+  -webkit-animation-duration: var(--icon-animation-duration, 1s);
+          animation-duration: var(--icon-animation-duration, 1s);
+  -webkit-animation-iteration-count: var(--icon-animation-iteration-count, infinite);
+          animation-iteration-count: var(--icon-animation-iteration-count, infinite);
+  -webkit-animation-timing-function: var(--icon-animation-timing, cubic-bezier(0.4, 0, 0.6, 1));
+          animation-timing-function: var(--icon-animation-timing, cubic-bezier(0.4, 0, 0.6, 1)); }
+
+.icon-flip {
+  -webkit-animation-name: fa-flip;
+          animation-name: fa-flip;
+  -webkit-animation-delay: var(--icon-animation-delay, 0s);
+          animation-delay: var(--icon-animation-delay, 0s);
+  -webkit-animation-direction: var(--icon-animation-direction, normal);
+          animation-direction: var(--icon-animation-direction, normal);
+  -webkit-animation-duration: var(--icon-animation-duration, 1s);
+          animation-duration: var(--icon-animation-duration, 1s);
+  -webkit-animation-iteration-count: var(--icon-animation-iteration-count, infinite);
+          animation-iteration-count: var(--icon-animation-iteration-count, infinite);
+  -webkit-animation-timing-function: var(--icon-animation-timing, ease-in-out);
+          animation-timing-function: var(--icon-animation-timing, ease-in-out); }
+
+.icon-shake {
+  -webkit-animation-name: fa-shake;
+          animation-name: fa-shake;
+  -webkit-animation-delay: var(--icon-animation-delay, 0s);
+          animation-delay: var(--icon-animation-delay, 0s);
+  -webkit-animation-direction: var(--icon-animation-direction, normal);
+          animation-direction: var(--icon-animation-direction, normal);
+  -webkit-animation-duration: var(--icon-animation-duration, 1s);
+          animation-duration: var(--icon-animation-duration, 1s);
+  -webkit-animation-iteration-count: var(--icon-animation-iteration-count, infinite);
+          animation-iteration-count: var(--icon-animation-iteration-count, infinite);
+  -webkit-animation-timing-function: var(--icon-animation-timing, linear);
+          animation-timing-function: var(--icon-animation-timing, linear); }
+
+.icon-spin {
+  -webkit-animation-name: fa-spin;
+          animation-name: fa-spin;
+  -webkit-animation-delay: var(--icon-animation-delay, 0s);
+          animation-delay: var(--icon-animation-delay, 0s);
+  -webkit-animation-direction: var(--icon-animation-direction, normal);
+          animation-direction: var(--icon-animation-direction, normal);
+  -webkit-animation-duration: var(--icon-animation-duration, 2s);
+          animation-duration: var(--icon-animation-duration, 2s);
+  -webkit-animation-iteration-count: var(--icon-animation-iteration-count, infinite);
+          animation-iteration-count: var(--icon-animation-iteration-count, infinite);
+  -webkit-animation-timing-function: var(--icon-animation-timing, linear);
+          animation-timing-function: var(--icon-animation-timing, linear); }
+
+.icon-spin-reverse {
+  --icon-animation-direction: reverse; }
+
+.icon-pulse,
+.icon-spin-pulse {
+  -webkit-animation-name: fa-spin;
+          animation-name: fa-spin;
+  -webkit-animation-direction: var(--icon-animation-direction, normal);
+          animation-direction: var(--icon-animation-direction, normal);
+  -webkit-animation-duration: var(--icon-animation-duration, 1s);
+          animation-duration: var(--icon-animation-duration, 1s);
+  -webkit-animation-iteration-count: var(--icon-animation-iteration-count, infinite);
+          animation-iteration-count: var(--icon-animation-iteration-count, infinite);
+  -webkit-animation-timing-function: var(--icon-animation-timing, steps(8));
+          animation-timing-function: var(--icon-animation-timing, steps(8)); }
+
+@media (prefers-reduced-motion: reduce) {
+  .icon-beat,
+  .icon-bounce,
+  .icon-fade,
+  .icon-beat-fade,
+  .icon-flip,
+  .icon-pulse,
+  .icon-shake,
+  .icon-spin,
+  .icon-spin-pulse {
+    -webkit-animation-delay: -1ms;
+            animation-delay: -1ms;
+    -webkit-animation-duration: 1ms;
+            animation-duration: 1ms;
+    -webkit-animation-iteration-count: 1;
+            animation-iteration-count: 1;
+    -webkit-transition-delay: 0s;
+            transition-delay: 0s;
+    -webkit-transition-duration: 0s;
+            transition-duration: 0s; } }
+
+@-webkit-keyframes fa-beat {
+  0%, 90% {
+    -webkit-transform: scale(1);
+            transform: scale(1); }
+  45% {
+    -webkit-transform: scale(var(--icon-beat-scale, 1.25));
+            transform: scale(var(--icon-beat-scale, 1.25)); } }
+
+@keyframes fa-beat {
+  0%, 90% {
+    -webkit-transform: scale(1);
+            transform: scale(1); }
+  45% {
+    -webkit-transform: scale(var(--icon-beat-scale, 1.25));
+            transform: scale(var(--icon-beat-scale, 1.25)); } }
+
+@-webkit-keyframes fa-bounce {
+  0% {
+    -webkit-transform: scale(1, 1) translateY(0);
+            transform: scale(1, 1) translateY(0); }
+  10% {
+    -webkit-transform: scale(var(--icon-bounce-start-scale-x, 1.1), var(--icon-bounce-start-scale-y, 0.9)) translateY(0);
+            transform: scale(var(--icon-bounce-start-scale-x, 1.1), var(--icon-bounce-start-scale-y, 0.9)) translateY(0); }
+  30% {
+    -webkit-transform: scale(var(--icon-bounce-jump-scale-x, 0.9), var(--icon-bounce-jump-scale-y, 1.1)) translateY(var(--icon-bounce-height, -0.5em));
+            transform: scale(var(--icon-bounce-jump-scale-x, 0.9), var(--icon-bounce-jump-scale-y, 1.1)) translateY(var(--icon-bounce-height, -0.5em)); }
+  50% {
+    -webkit-transform: scale(var(--icon-bounce-land-scale-x, 1.05), var(--icon-bounce-land-scale-y, 0.95)) translateY(0);
+            transform: scale(var(--icon-bounce-land-scale-x, 1.05), var(--icon-bounce-land-scale-y, 0.95)) translateY(0); }
+  57% {
+    -webkit-transform: scale(1, 1) translateY(var(--icon-bounce-rebound, -0.125em));
+            transform: scale(1, 1) translateY(var(--icon-bounce-rebound, -0.125em)); }
+  64% {
+    -webkit-transform: scale(1, 1) translateY(0);
+            transform: scale(1, 1) translateY(0); }
+  100% {
+    -webkit-transform: scale(1, 1) translateY(0);
+            transform: scale(1, 1) translateY(0); } }
+
+@keyframes fa-bounce {
+  0% {
+    -webkit-transform: scale(1, 1) translateY(0);
+            transform: scale(1, 1) translateY(0); }
+  10% {
+    -webkit-transform: scale(var(--icon-bounce-start-scale-x, 1.1), var(--icon-bounce-start-scale-y, 0.9)) translateY(0);
+            transform: scale(var(--icon-bounce-start-scale-x, 1.1), var(--icon-bounce-start-scale-y, 0.9)) translateY(0); }
+  30% {
+    -webkit-transform: scale(var(--icon-bounce-jump-scale-x, 0.9), var(--icon-bounce-jump-scale-y, 1.1)) translateY(var(--icon-bounce-height, -0.5em));
+            transform: scale(var(--icon-bounce-jump-scale-x, 0.9), var(--icon-bounce-jump-scale-y, 1.1)) translateY(var(--icon-bounce-height, -0.5em)); }
+  50% {
+    -webkit-transform: scale(var(--icon-bounce-land-scale-x, 1.05), var(--icon-bounce-land-scale-y, 0.95)) translateY(0);
+            transform: scale(var(--icon-bounce-land-scale-x, 1.05), var(--icon-bounce-land-scale-y, 0.95)) translateY(0); }
+  57% {
+    -webkit-transform: scale(1, 1) translateY(var(--icon-bounce-rebound, -0.125em));
+            transform: scale(1, 1) translateY(var(--icon-bounce-rebound, -0.125em)); }
+  64% {
+    -webkit-transform: scale(1, 1) translateY(0);
+            transform: scale(1, 1) translateY(0); }
+  100% {
+    -webkit-transform: scale(1, 1) translateY(0);
+            transform: scale(1, 1) translateY(0); } }
+
+@-webkit-keyframes fa-fade {
+  50% {
+    opacity: var(--icon-fade-opacity, 0.4); } }
+
+@keyframes fa-fade {
+  50% {
+    opacity: var(--icon-fade-opacity, 0.4); } }
+
+@-webkit-keyframes fa-beat-fade {
+  0%, 100% {
+    opacity: var(--icon-beat-fade-opacity, 0.4);
+    -webkit-transform: scale(1);
+            transform: scale(1); }
+  50% {
+    opacity: 1;
+    -webkit-transform: scale(var(--icon-beat-fade-scale, 1.125));
+            transform: scale(var(--icon-beat-fade-scale, 1.125)); } }
+
+@keyframes fa-beat-fade {
+  0%, 100% {
+    opacity: var(--icon-beat-fade-opacity, 0.4);
+    -webkit-transform: scale(1);
+            transform: scale(1); }
+  50% {
+    opacity: 1;
+    -webkit-transform: scale(var(--icon-beat-fade-scale, 1.125));
+            transform: scale(var(--icon-beat-fade-scale, 1.125)); } }
+
+@-webkit-keyframes fa-flip {
+  50% {
+    -webkit-transform: rotate3d(var(--icon-flip-x, 0), var(--icon-flip-y, 1), var(--icon-flip-z, 0), var(--icon-flip-angle, -180deg));
+            transform: rotate3d(var(--icon-flip-x, 0), var(--icon-flip-y, 1), var(--icon-flip-z, 0), var(--icon-flip-angle, -180deg)); } }
+
+@keyframes fa-flip {
+  50% {
+    -webkit-transform: rotate3d(var(--icon-flip-x, 0), var(--icon-flip-y, 1), var(--icon-flip-z, 0), var(--icon-flip-angle, -180deg));
+            transform: rotate3d(var(--icon-flip-x, 0), var(--icon-flip-y, 1), var(--icon-flip-z, 0), var(--icon-flip-angle, -180deg)); } }
+
+@-webkit-keyframes fa-shake {
+  0% {
+    -webkit-transform: rotate(-15deg);
+            transform: rotate(-15deg); }
+  4% {
+    -webkit-transform: rotate(15deg);
+            transform: rotate(15deg); }
+  8%, 24% {
+    -webkit-transform: rotate(-18deg);
+            transform: rotate(-18deg); }
+  12%, 28% {
+    -webkit-transform: rotate(18deg);
+            transform: rotate(18deg); }
+  16% {
+    -webkit-transform: rotate(-22deg);
+            transform: rotate(-22deg); }
+  20% {
+    -webkit-transform: rotate(22deg);
+            transform: rotate(22deg); }
+  32% {
+    -webkit-transform: rotate(-12deg);
+            transform: rotate(-12deg); }
+  36% {
+    -webkit-transform: rotate(12deg);
+            transform: rotate(12deg); }
+  40%, 100% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); } }
+
+@keyframes fa-shake {
+  0% {
+    -webkit-transform: rotate(-15deg);
+            transform: rotate(-15deg); }
+  4% {
+    -webkit-transform: rotate(15deg);
+            transform: rotate(15deg); }
+  8%, 24% {
+    -webkit-transform: rotate(-18deg);
+            transform: rotate(-18deg); }
+  12%, 28% {
+    -webkit-transform: rotate(18deg);
+            transform: rotate(18deg); }
+  16% {
+    -webkit-transform: rotate(-22deg);
+            transform: rotate(-22deg); }
+  20% {
+    -webkit-transform: rotate(22deg);
+            transform: rotate(22deg); }
+  32% {
+    -webkit-transform: rotate(-12deg);
+            transform: rotate(-12deg); }
+  36% {
+    -webkit-transform: rotate(12deg);
+            transform: rotate(12deg); }
+  40%, 100% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); } }
+
+@-webkit-keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
+
+@keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
+
+.icon-rotate-90 {
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg); }
+
+.icon-rotate-180 {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg); }
+
+.icon-rotate-270 {
+  -webkit-transform: rotate(270deg);
+          transform: rotate(270deg); }
+
+.icon-flip-horizontal {
+  -webkit-transform: scale(-1, 1);
+          transform: scale(-1, 1); }
+
+.icon-flip-vertical {
+  -webkit-transform: scale(1, -1);
+          transform: scale(1, -1); }
+
+.icon-flip-both,
+.icon-flip-horizontal.icon-flip-vertical {
+  -webkit-transform: scale(-1, -1);
+          transform: scale(-1, -1); }
+
+.icon-rotate-by {
+  -webkit-transform: rotate(var(--icon-rotate-angle, none));
+          transform: rotate(var(--icon-rotate-angle, none)); }
+
+.icon-stack {
+  display: inline-block;
+  height: 2em;
+  line-height: 2em;
+  position: relative;
+  vertical-align: middle;
+  width: 2.5em; }
+
+.icon-stack-1x,
+.icon-stack-2x {
+  left: 0;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  z-index: var(--icon-stack-z-index, auto); }
+
+.icon-stack-1x {
+  line-height: inherit; }
+
+.icon-stack-2x {
+  font-size: 2em; }
+
+.icon-inverse {
+  color: var(--icon-inverse, #fff); }
+
+/* Font Awesome uses the Unicode Private Use Area (PUA) to ensure screen
+readers do not read off random characters that represent icons */
+
+
+/* ─── EXTRACTED ICONS ─────────────────────────────────────── */
+.icon-address-card:before { font-family: "AppIcons"; font-weight: 900; content: "\f2bb"; }
+.icon-book:before { font-family: "AppIcons"; font-weight: 900; content: "\f02d"; }
+.icon-brain:before { font-family: "AppIcons"; font-weight: 900; content: "\f5dc"; }
+.icon-brush:before { font-family: "AppIcons"; font-weight: 900; content: "\f55d"; }
+.icon-c:before { font-family: "AppIcons"; font-weight: 900; content: "\43"; }
+.icon-calculator:before { font-family: "AppIcons"; font-weight: 900; content: "\f1ec"; }
+.icon-certificate:before { font-family: "AppIcons"; font-weight: 900; content: "\f0a3"; }
+.icon-chart-area:before { font-family: "AppIcons"; font-weight: 900; content: "\f1fe"; }
+.icon-chart-bar:before { font-family: "AppIcons"; font-weight: 900; content: "\f080"; }
+.icon-chart-line:before { font-family: "AppIcons"; font-weight: 900; content: "\f201"; }
+.icon-chart-simple:before { font-family: "AppIcons"; font-weight: 900; content: "\e473"; }
+.icon-circle-half-stroke:before { font-family: "AppIcons"; font-weight: 900; content: "\f042"; }
+.icon-code:before { font-family: "AppIcons"; font-weight: 900; content: "\f121"; }
+.icon-code-branch:before { font-family: "AppIcons"; font-weight: 900; content: "\f126"; }
+.icon-comment-dots:before { font-family: "AppIcons"; font-weight: 900; content: "\f4ad"; }
+.icon-css3-alt:before { font-family: "AppBrands"; font-weight: 400; content: "\f38b"; }
+.icon-database:before { font-family: "AppIcons"; font-weight: 900; content: "\f1c0"; }
+.icon-diagram-project:before { font-family: "AppIcons"; font-weight: 900; content: "\f542"; }
+.icon-docker:before { font-family: "AppBrands"; font-weight: 400; content: "\f395"; }
+.icon-envelope:before { font-family: "AppIcons"; font-weight: 900; content: "\f0e0"; }
+.icon-flag-checkered:before { font-family: "AppIcons"; font-weight: 900; content: "\f11e"; }
+.icon-flask:before { font-family: "AppIcons"; font-weight: 900; content: "\f0c3"; }
+.icon-git-alt:before { font-family: "AppBrands"; font-weight: 400; content: "\f841"; }
+.icon-github:before { font-family: "AppBrands"; font-weight: 400; content: "\f09b"; }
+.icon-github-alt:before { font-family: "AppBrands"; font-weight: 400; content: "\f113"; }
+.icon-globe:before { font-family: "AppIcons"; font-weight: 900; content: "\f0ac"; }
+.icon-google:before { font-family: "AppBrands"; font-weight: 400; content: "\f1a0"; }
+.icon-graduation-cap:before { font-family: "AppIcons"; font-weight: 900; content: "\f19d"; }
+.icon-grip:before { font-family: "AppIcons"; font-weight: 900; content: "\f58d"; }
+.icon-hackerrank:before { font-family: "AppBrands"; font-weight: 400; content: "\f5f7"; }
+.icon-html5:before { font-family: "AppBrands"; font-weight: 400; content: "\f13b"; }
+.icon-java:before { font-family: "AppBrands"; font-weight: 400; content: "\f4e4"; }
+.icon-laptop-code:before { font-family: "AppIcons"; font-weight: 900; content: "\f5fc"; }
+.icon-linkedin:before { font-family: "AppBrands"; font-weight: 400; content: "\f08c"; }
+.icon-linux:before { font-family: "AppBrands"; font-weight: 400; content: "\f17c"; }
+.icon-magnifying-glass-chart:before { font-family: "AppIcons"; font-weight: 900; content: "\e522"; }
+.icon-medal:before { font-family: "AppIcons"; font-weight: 900; content: "\f5a2"; }
+.icon-mobile:before { font-family: "AppIcons"; font-weight: 900; content: "\f3ce"; }
+.icon-mobile-screen:before { font-family: "AppIcons"; font-weight: 900; content: "\f3cf"; }
+.icon-people-group:before { font-family: "AppIcons"; font-weight: 900; content: "\e533"; }
+.icon-phone:before { font-family: "AppIcons"; font-weight: 900; content: "\f095"; }
+.icon-php:before { font-family: "AppBrands"; font-weight: 400; content: "\f457"; }
+.icon-plug:before { font-family: "AppIcons"; font-weight: 900; content: "\f1e6"; }
+.icon-python:before { font-family: "AppBrands"; font-weight: 400; content: "\f3e2"; }
+.icon-robot:before { font-family: "AppIcons"; font-weight: 900; content: "\f544"; }
+.icon-rocket:before { font-family: "AppIcons"; font-weight: 900; content: "\f135"; }
+.icon-seedling:before { font-family: "AppIcons"; font-weight: 900; content: "\f4d8"; }
+.icon-server:before { font-family: "AppIcons"; font-weight: 900; content: "\f233"; }
+.icon-star:before { font-family: "AppIcons"; font-weight: 900; content: "\f005"; }
+.icon-table:before { font-family: "AppIcons"; font-weight: 900; content: "\f0ce"; }
+.icon-terminal:before { font-family: "AppIcons"; font-weight: 900; content: "\f120"; }
+.icon-trophy:before { font-family: "AppIcons"; font-weight: 900; content: "\f091"; }
+.icon-user:before { font-family: "AppIcons"; font-weight: 900; content: "\f007"; }
+.icon-utensils:before { font-family: "AppIcons"; font-weight: 900; content: "\f2e7"; }
+.icon-wand-magic-sparkles:before { font-family: "AppIcons"; font-weight: 900; content: "\e2ca"; }
+.icon-whatsapp:before { font-family: "AppBrands"; font-weight: 400; content: "\f232"; }
+.icon-x-twitter:before { font-family: "AppBrands"; font-weight: 400; content: "\e61b"; }
