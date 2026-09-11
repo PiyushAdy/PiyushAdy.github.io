@@ -6,96 +6,7 @@
   <title>Piyush Adlakha — Portfolio</title>
   <link href="https://cdn.jsdelivr.net/npm/beercss@3.7.10/dist/cdn/beer.min.css" rel="stylesheet" />
   <script type="module" src="https://cdn.jsdelivr.net/npm/material-dynamic-colors@1.1.2/dist/cdn/material-dynamic-colors.min.js"></script>
-  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css">
- <link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/rizmyabdulla/fontawesome-pro@main/releases/v7.2.0/css/fontawesome.css"
-/>
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/rizmyabdulla/fontawesome-pro@main/releases/v7.2.0/css/sharp-solid.css"
-/>
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/rizmyabdulla/fontawesome-pro@main/releases/v7.2.0/css/sharp-regular.css"
-/>
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/rizmyabdulla/fontawesome-pro@main/releases/v7.2.0/css/sharp-light.css"
-/>
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/rizmyabdulla/fontawesome-pro@main/releases/v7.2.0/css/duotone.css"
-/>
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/rizmyabdulla/fontawesome-pro@main/releases/v7.2.0/css/solid.css"
-/>
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/rizmyabdulla/fontawesome-pro@main/releases/v7.2.0/css/regular.css"
-/>
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/rizmyabdulla/fontawesome-pro@main/releases/v7.2.0/css/light.css"
-/>
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/rizmyabdulla/fontawesome-pro@main/releases/v7.2.0/css/brands.css"
-/>
-
-<!-- Additional Fontawesome Pro+ Icons for v7.2.0 -->
-
-<!-- Sharp Duotone -->
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/rizmyabdulla/fontawesome-pro@main/releases/v7.2.0/css/sharp-duotone-solid.css"
-/>
-<!-- Chisel -->
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/rizmyabdulla/fontawesome-pro@main/releases/v7.2.0/css/chisel-regular.css"
-/>
-<!-- Etch -->
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/rizmyabdulla/fontawesome-pro@main/releases/v7.2.0/css/etch-solid.css"
-/>
-<!-- Graphite -->
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/rizmyabdulla/fontawesome-pro@main/releases/v7.2.0/css/graphite-thin.css"
-/>
-<!-- Jelly -->
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/rizmyabdulla/fontawesome-pro@main/releases/v7.2.0/css/jelly-regular.css"
-/>
-<!-- Notdog -->
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/rizmyabdulla/fontawesome-pro@main/releases/v7.2.0/css/notdog-solid.css"
-/>
-<!-- Slab -->
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/rizmyabdulla/fontawesome-pro@main/releases/v7.2.0/css/slab-regular.css"
-/>
-<!-- Thumb Print -->
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/rizmyabdulla/fontawesome-pro@main/releases/v7.2.0/css/thumbprint-light.css"
-/>
-<!-- Utility -->
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/rizmyabdulla/fontawesome-pro@main/releases/v7.2.0/css/utility-semibold.css"
-/>
-<!-- Whiteboard -->
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/rizmyabdulla/fontawesome-pro@main/releases/v7.2.0/css/whiteboard-semibold.css"
-/>
+  <link rel="stylesheet" href="css/icons.css" />
   <style>
     /* ─── DARK THEME ─────────────────────────────────────────── */
     :root, body.dark {
@@ -224,6 +135,18 @@
 
     nav.left a i {
       color: inherit;
+    }
+
+    /* ─── ICON FIXES (BeerCSS reset) ─────────────────────────── */
+    .icon {
+      display: inline-block !important;
+      inline-size: auto !important;
+      block-size: auto !important;
+      min-inline-size: 0 !important;
+      min-block-size: 0 !important;
+      line-height: 1 !important;
+      vertical-align: middle;
+      box-sizing: border-box !important;
     }
 
     /* ─── MAIN LAYOUT ────────────────────────────────────────── */
@@ -491,6 +414,34 @@
       margin: 0;
     }
 
+    .project-header-right {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-shrink: 0;
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--primary);
+      text-decoration: none;
+      padding: 0.2rem 0.65rem;
+      border-radius: 999px;
+      border: 1px solid var(--card-border);
+      background: var(--tag-bg);
+      transition: all 0.2s ease;
+    }
+
+    .project-link:hover {
+      background: var(--primary);
+      color: var(--on-primary);
+      border-color: var(--primary);
+    }
+
     .project-year {
       font-family: 'DM Mono', monospace;
       font-size: 0.78rem;
@@ -656,39 +607,39 @@
   <!-- ── SIDEBAR ─────────────────────────────────────────────── -->
   <nav class="left center-align right-round surface-dim">
     <a href="#About">
-      <i class="fa-solid fa-user"></i>
+      <i class="icon icon-user"></i>
       <span>About</span>
     </a>
     <a href="#Education">
-      <i class="fa-solid fa-graduation-cap"></i>
+      <i class="icon icon-graduation-cap"></i>
       <span>Education</span>
     </a>
     <a href="#Skills">
-      <i class="fa-solid fa-code"></i>
+      <i class="icon icon-code"></i>
       <span>Skills</span>
     </a>
     <a href="#Projects">
-      <i class="fa-solid fa-diagram-project"></i>
+      <i class="icon icon-diagram-project"></i>
       <span>Projects</span>
     </a>
     <a href="#Leadership">
-      <i class="fa-solid fa-people-group"></i>
+      <i class="icon icon-people-group"></i>
       <span>Activity</span>
     </a>
     <a href="#Achievements">
-      <i class="fa-solid fa-trophy"></i>
+      <i class="icon icon-trophy"></i>
       <span>Awards</span>
     </a>
     <a href="#Profiles">
-      <i class="fa-brands fa-github"></i>
+      <i class="icon icon-github"></i>
       <span>Profiles</span>
     </a>
     <a href="#Socials">
-      <i class="fa-solid fa-address-card"></i>
+      <i class="icon icon-address-card"></i>
       <span>Socials</span>
     </a>
     <a id="theme-btn" onclick="toggleTheme()">
-      <i class="fa-solid fa-circle-half-stroke"></i>
+      <i class="icon icon-circle-half-stroke"></i>
       <span>Theme</span>
     </a>
   </nav>
@@ -703,15 +654,14 @@
           <p class="hero-tagline mono">B.Tech CSE · Manav Rachna University</p>
           <h1 class="hero-name">Hi, I'm <span>Piyush</span><br>Adlakha.</h1>
           <p class="hero-desc">
-            A tech enthusiast and undergraduate developer with a passion for building impactful, full-stack solutions — from AI-driven AgriTech platforms to data analytics dashboards. Currently exploring Android development and broadening my stack to become a versatile engineer.
+            A software engineer and computer science undergraduate passionate about distributed systems, backend infrastructure, concurrency, and local-first AI developer tooling. Experienced in building high-throughput systems with Redis, Node.js/TypeScript, Python, and SQLite.
           </p>
           <div class="stat-chips">
-            <span class="stat-chip"><i class="fa-solid fa-star"></i> CGPA 9.27 · Top 5%</span>
-            <span class="stat-chip"><i class="fa-solid fa-trophy"></i> 2× Dean's List</span>
-            <span class="stat-chip"><i class="fa-solid fa-medal"></i> Hackathon Winner</span>
-            <span class="stat-chip"><i class="fa-solid fa-code"></i> 300+ DSA Solved</span>
-            <span class="stat-chip"><i class="fa-solid fa-seedling"></i> Pre-Incubated Startup</span>
-            <span class="stat-chip" title="CodeChef Rating 1618">⭐⭐⭐ CodeChef 3★ · 1618</span>
+            <span class="stat-chip"><i class="icon icon-star"></i> CGPA 9.36 · Top 1%</span>
+            <span class="stat-chip"><i class="icon icon-trophy"></i> 3× Dean's List · 1× VC's List</span>
+            <span class="stat-chip"><i class="icon icon-medal"></i> Hackathon Winner</span>
+            <span class="stat-chip"><i class="icon icon-code"></i> 600+ DSA Solved</span>
+            <span class="stat-chip" title="CodeChef Rating 1712">⭐⭐⭐ CodeChef 3★ · 1712</span>
             <span class="stat-chip" title="Codeforces Rating">🟦 Codeforces Pupil</span>
           </div>
         </div>
@@ -723,239 +673,247 @@
 
     <!-- EDUCATION -->
     <article id="Education" class="section-card">
-      <h2 class="section-title"><i class="fa-solid fa-graduation-cap"></i>Education</h2>
+      <h2 class="section-title"><i class="icon icon-graduation-cap"></i>Education</h2>
       <hr class="section-divider">
       <div class="edu-card">
         <h6>B.Tech in Computer Science and Engineering</h6>
         <p class="edu-meta">Manav Rachna University · Faridabad, Haryana · Aug 2024 – Present</p>
-        <div class="edu-detail"><i class="fa-solid fa-chart-line"></i><span>CGPA: <strong>9.27/10.0</strong> (up to Semester 3) · 2× Dean's List Awardee · Top 5% of cohort</span></div>
-        <div class="edu-detail"><i class="fa-solid fa-certificate"></i><span>Certifications: <strong>CS50x</strong> (Harvard University), <strong>CS50P</strong> (Harvard University)</span></div>
-        <div class="edu-detail"><i class="fa-solid fa-book"></i><span>Coursework: Data Structures & Algorithms, Database Management Systems, Object-Oriented Programming</span></div>
-      </div>
-
-      <div style="height:0.9rem"></div>
-
-      <div class="edu-card">
-        <h6>Class XII — Senior Secondary</h6>
-        <p class="edu-meta">CBSE Board · 2024</p>
-        <div class="edu-detail"><i class="fa-solid fa-chart-line"></i><span>Aggregate: <strong>89%</strong></span></div>
-      </div>
-
-      <div style="height:0.9rem"></div>
-
-      <div class="edu-card">
-        <h6>Class X — Secondary</h6>
-        <p class="edu-meta">CBSE Board · 2022</p>
-        <div class="edu-detail"><i class="fa-solid fa-chart-line"></i><span>Aggregate: <strong>93%</strong></span></div>
+        <div class="edu-detail"><i class="icon icon-chart-line"></i><span>CGPA: <strong>9.36/10.0</strong> (up to Semester 4) · 3× Dean's List · 1× Vice Chancellor's List Awardee · Top 1% of cohort</span></div>
+        <div class="edu-detail"><i class="icon icon-certificate"></i><span>Certifications: <strong>CS50x</strong> (Harvard University), <strong>CS50P</strong> (Harvard University)</span></div>
+        <div class="edu-detail"><i class="icon icon-book"></i><span>Coursework: Data Structures & Algorithms, Database Management Systems, Object-Oriented Programming, Operating Systems</span></div>
       </div>
     </article>
 
     <!-- SKILLS -->
     <article id="Skills" class="section-card">
-      <h2 class="section-title"><i class="fa-solid fa-code"></i>Technical Skills</h2>
+      <h2 class="section-title"><i class="icon icon-code"></i>Technical Skills</h2>
       <hr class="section-divider">
 
       <p class="skill-category">Languages</p>
       <div class="skill-grid">
-        <div class="skill-item"><i class="fa-brands fa-python"></i>Python</div>
-        <div class="skill-item"><i class="fa-solid fa-c"></i>C / C++</div>
-        <div class="skill-item"><i class="fa-solid fa-database"></i>SQL</div>
-        <div class="skill-item"><i class="fa-brands fa-java"></i>Java</div>
-        <div class="skill-item"><i class="fa-brands fa-html5"></i>HTML / CSS</div>
-        <div class="skill-item"><i class="fa-solid fa-chart-bar"></i>R</div>
-        <div class="skill-item"><i class="fa-solid fa-mobile-screen"></i>Dart</div>
+        <div class="skill-item"><i class="icon icon-python"></i>Python</div>
+        <div class="skill-item"><i class="icon icon-code"></i>TypeScript</div>
+        <div class="skill-item"><i class="icon icon-code"></i>JavaScript</div>
+        <div class="skill-item"><i class="icon icon-database"></i>SQL</div>
+        <div class="skill-item"><i class="icon icon-c"></i>C / C++</div>
       </div>
 
       <p class="skill-category">Frameworks & Libraries</p>
       <div class="skill-grid">
-        <div class="skill-item"><i class="fa-solid fa-mobile"></i>Flutter</div>
-        <div class="skill-item"><i class="fa-solid fa-flask"></i>Flask</div>
-        <div class="skill-item"><i class="fa-solid fa-table"></i>Pandas</div>
-        <div class="skill-item"><i class="fa-solid fa-calculator"></i>NumPy</div>
-        <div class="skill-item"><i class="fa-solid fa-brain"></i>Scikit-learn</div>
-        <div class="skill-item"><i class="fa-solid fa-chart-area"></i>Matplotlib</div>
-        <div class="skill-item"><i class="fa-solid fa-server"></i>SQLAlchemy</div>
+        <div class="skill-item"><i class="icon icon-server"></i>Node.js</div>
+        <div class="skill-item"><i class="icon icon-server"></i>Express.js</div>
+        <div class="skill-item"><i class="icon icon-flask"></i>FastAPI</div>
+        <div class="skill-item"><i class="icon icon-robot"></i>FastMCP</div>
+        <div class="skill-item"><i class="icon icon-plug"></i>Socket.IO</div>
+        <div class="skill-item"><i class="icon icon-code"></i>React.js</div>
       </div>
 
-      <p class="skill-category">Cloud & Infrastructure</p>
+      <p class="skill-category">Databases & Data Stores</p>
       <div class="skill-grid">
-        <div class="skill-item"><i class="fa-brands fa-google"></i>Firebase</div>
-        <div class="skill-item"><i class="fa-brands fa-docker"></i>Docker</div>
-        <div class="skill-item"><i class="fa-brands fa-git-alt"></i>Git</div>
-        <div class="skill-item"><i class="fa-brands fa-linux"></i>Linux</div>
-        <div class="skill-item"><i class="fa-solid fa-plug"></i>REST APIs</div>
+        <div class="skill-item"><i class="icon icon-database"></i>PostgreSQL</div>
+        <div class="skill-item"><i class="icon icon-server"></i>Redis</div>
+        <div class="skill-item"><i class="icon icon-database"></i>SQLite</div>
+        <div class="skill-item"><i class="icon icon-brain"></i>ChromaDB (Vector DB)</div>
       </div>
 
-      <p class="skill-category">AI & Data</p>
+      <p class="skill-category">Systems, DevOps & AI</p>
       <div class="skill-grid">
-        <div class="skill-item"><i class="fa-solid fa-robot"></i>Gemini API</div>
-        <div class="skill-item"><i class="fa-solid fa-wand-magic-sparkles"></i>Prompt Eng.</div>
-        <div class="skill-item"><i class="fa-solid fa-comment-dots"></i>NLP / VADER</div>
-        <div class="skill-item"><i class="fa-solid fa-magnifying-glass-chart"></i>Data Analysis</div>
+        <div class="skill-item"><i class="icon icon-docker"></i>Docker</div>
+        <div class="skill-item"><i class="icon icon-git-alt"></i>Git</div>
+        <div class="skill-item"><i class="icon icon-linux"></i>Linux</div>
+        <div class="skill-item"><i class="icon icon-plug"></i>REST APIs</div>
+        <div class="skill-item"><i class="icon icon-comment-dots"></i>WebSockets</div>
+        <div class="skill-item"><i class="icon icon-diagram-project"></i>Distributed Systems</div>
+        <div class="skill-item"><i class="icon icon-robot"></i>LiteLLM</div>
+        <div class="skill-item"><i class="icon icon-wand-magic-sparkles"></i>MCP</div>
       </div>
     </article>
 
     <!-- PROJECTS -->
     <article id="Projects" class="section-card">
-      <h2 class="section-title"><i class="fa-solid fa-diagram-project"></i>Projects</h2>
+      <h2 class="section-title"><i class="icon icon-diagram-project"></i>Projects</h2>
       <hr class="section-divider">
 
-      <!-- FarmSense AI -->
+      <!-- QueueGate -->
       <div class="project-card">
         <div class="project-header">
-          <h3 class="project-title">🌾 FarmSense AI</h3>
-          <span class="project-year">2024</span>
+          <h3 class="project-title">⚡ QueueGate — Ticket Queue Engine</h3>
+          <div class="project-header-right">
+            <a class="project-link" href="https://github.com/PiyushAdy/QueueGate" target="_blank"><i class="icon icon-github"></i> GitHub</a>
+          </div>
         </div>
         <ul class="project-desc">
-          <li>Architected a full-stack <strong>AgriTech mobile platform</strong> securing pre-incubation support; won <strong>1st place at Google Digital Campus Hackathon</strong> and Runner-Up at InnoSkill.</li>
-          <li>Integrated <strong>Google Gemini API</strong> for multimodal crop disease diagnostics and deployed on-device offline AI (Gemma 3 1B) for zero-network functionality in low-connectivity rural environments.</li>
-          <li>Designed a <strong>serverless Firebase</strong> (Auth + Firestore) backend to synchronise IoT telemetry and built Flask REST API pipelines ingesting live sensor & OpenWeatherMap geospatial data.</li>
+          <li>Engineered a <strong>distributed ticket-queue and reservation system</strong> that isolates the relational database from flash-sale surge traffic — ephemeral queue state lives entirely in Redis, while Postgres is touched only for event creation and confirmed bookings.</li>
+          <li>Eliminated check-then-act race conditions with <strong>4 atomic Redis Lua scripts</strong> (queue join, batch admission, hold expiry, booking confirmation) executing inventory checks and hold transitions inside Redis's single-threaded engine — validated to <strong>0.00% oversell</strong> under an adversarial test of 25 concurrent checkouts racing for 5 tickets.</li>
+          <li>Built a <strong>self-healing reconciliation worker</strong> that sweeps expired holds on a 5-second interval, atomically reclaims abandoned inventory, and cascades admission to the next waitlisted users — ensuring abandoned sessions never strand inventory.</li>
+          <li>Implemented <strong>real-time queue-position streaming</strong> with Socket.IO and the Redis Pub/Sub adapter, enabling stateless horizontal scaling without sticky sessions, with per-user/per-event room isolation.</li>
+          <li>Designed a <strong>state-partitioned write model</strong> where Redis confirms the hold atomically before the Postgres insert, backed by compound unique constraints and unique-violation handling as a final defense against duplicate bookings.</li>
+          <li>Authored an automated concurrency benchmark suite simulating a 200-client simultaneous join burst followed by synchronized double-booking attempts, measuring <strong>1,198 req/sec sustained</strong> across the 200-client join burst.</li>
         </ul>
         <div class="tech-tags">
-          <span class="tech-tag">Flutter</span>
-          <span class="tech-tag">Dart</span>
-          <span class="tech-tag">Python</span>
-          <span class="tech-tag">Flask</span>
-          <span class="tech-tag">Firebase</span>
-          <span class="tech-tag">Gemini API</span>
-          <span class="tech-tag">Gemma 3 1B</span>
-          <span class="tech-tag">REST APIs</span>
+          <span class="tech-tag">TypeScript</span>
+          <span class="tech-tag">Node.js</span>
+          <span class="tech-tag">Express</span>
+          <span class="tech-tag">Redis</span>
+          <span class="tech-tag">PostgreSQL</span>
+          <span class="tech-tag">Socket.IO</span>
+          <span class="tech-tag">Docker</span>
+          <span class="tech-tag">Lua</span>
         </div>
       </div>
 
-      <!-- MovieTrends -->
+      <!-- Foray -->
       <div class="project-card">
         <div class="project-header">
-          <h3 class="project-title">🎬 MovieTrends</h3>
-          <span class="project-year">2024</span>
+          <h3 class="project-title">🔍 Foray — Codebase Intelligence Engine</h3>
+          <div class="project-header-right">
+            <a class="project-link" href="https://github.com/PiyushAdy/Foray" target="_blank"><i class="icon icon-github"></i> GitHub</a>
+          </div>
         </div>
         <ul class="project-desc">
-          <li>Built a <strong>data analytics web platform</strong> using Flask to explore a century of IMDb cinematic data, enabling dynamic filtering of top-rated films by genre and decade via real-time dashboard queries.</li>
-          <li>Engineered an <strong>ETL pipeline</strong> with Pandas for large-scale IMDb dataset ingestion — handling missing value imputation, datetime transformations, multi-label genre exploding, and pivot table analysis to surface genre evolution trends.</li>
-          <li>Architected an <strong>AI interpretation layer</strong> using Google Gemini 2.0 Flash with structured prompt engineering for zero-shot analysis on tabular cinematic metrics, delivering web-ready HTML insight cards.</li>
+          <li>Built a <strong>local-first codebase-intelligence tool</strong> that indexes repositories into embedded SQLite + Chroma and exposes an <strong>MCP context server</strong> so AI coding agents (e.g., Claude Code) can query the indexed repo — zero external services, single <code class="mono">uvx</code> install, plus a minimal web UI.</li>
+          <li>Designed a <strong>hybrid retrieval pipeline</strong> combining SQLite FTS5 (BM25) keyword search with semantic vector search, fused via <strong>Reciprocal Rank Fusion (RRF)</strong> and expanded with import-graph neighbors — eliminating exact-identifier misses without a costly cross-encoder reranker. AST-aware chunking via tree-sitter-language-pack (300+ language grammars).</li>
+          <li>Engineered the indexing pipeline as a <strong>serialized asyncio worker</strong> using SQLite (WAL mode) as a durable job queue, with atomic directory-swap publication and SSE progress streaming — making race conditions impossible by construction and crashes safe by design.</li>
+          <li>Authored a <strong>deterministic retrieval evaluation suite</strong> (30-question golden set; Recall@5, Recall@10, MRR) wired into CI as a regression gate — hand-rolled the LLM layer on LiteLLM instead of LangChain to keep retrieval fully debuggable.</li>
         </ul>
         <div class="tech-tags">
           <span class="tech-tag">Python</span>
-          <span class="tech-tag">Flask</span>
-          <span class="tech-tag">Pandas</span>
-          <span class="tech-tag">Matplotlib</span>
-          <span class="tech-tag">Gemini API</span>
-          <span class="tech-tag">IMDb Dataset</span>
-          <span class="tech-tag">Vercel</span>
+          <span class="tech-tag">FastAPI</span>
+          <span class="tech-tag">SQLite</span>
+          <span class="tech-tag">ChromaDB</span>
+          <span class="tech-tag">tree-sitter</span>
+          <span class="tech-tag">FastMCP</span>
+          <span class="tech-tag">LiteLLM</span>
+          <span class="tech-tag">React.js</span>
+        </div>
+      </div>
+
+      <!-- Throttle -->
+      <div class="project-card">
+        <div class="project-header">
+          <h3 class="project-title">🛡️ Throttle — Distributed Rate Limiter</h3>
+          <div class="project-header-right">
+            <a class="project-link" href="https://github.com/PiyushAdy/Throttle" target="_blank"><i class="icon icon-github"></i> GitHub</a>
+          </div>
+        </div>
+        <ul class="project-desc">
+          <li>Built a <strong>distributed rate-limiting library</strong> implementing token-bucket and sliding-window algorithms as <strong>atomic Redis Lua scripts</strong>, packaged as drop-in Express middleware for per-user/per-IP throttling across multiple service instances.</li>
+          <li>Eliminated read-check-increment race conditions by executing limit checks and counter updates atomically inside Redis's single-threaded engine, guaranteeing correct limits under concurrent load without external locks.</li>
+          <li>Designed a <strong>pluggable key-resolver interface</strong> (per-user, per-IP, per-API-key) with configurable limit tiers, making the library reusable across services with different throttling requirements.</li>
+        </ul>
+        <div class="tech-tags">
+          <span class="tech-tag">TypeScript</span>
+          <span class="tech-tag">Node.js</span>
+          <span class="tech-tag">Express</span>
+          <span class="tech-tag">Redis</span>
+          <span class="tech-tag">Lua</span>
+          <span class="tech-tag">Distributed Systems</span>
         </div>
       </div>
     </article>
 
     <!-- LEADERSHIP & COMMUNITY -->
     <article id="Leadership" class="section-card">
-      <h2 class="section-title"><i class="fa-solid fa-people-group"></i>Leadership & Community</h2>
+      <h2 class="section-title"><i class="icon icon-people-group"></i>Leadership & Community</h2>
       <hr class="section-divider">
 
       <div class="list-item">
-        <div class="list-icon"><i class="fa-solid fa-laptop-code"></i></div>
+        <div class="list-icon"><i class="icon icon-laptop-code"></i></div>
         <div class="list-content">
-          <p class="list-meta">Club Coordinator &amp; Android · DSA Tech Lead · 2025 – Present</p>
-          <h6>TechSoul — Technical Society, Manav Rachna University</h6>
-          <p>Leading a core team of 15+ members to organise technical workshops, hackathons, and skill-building sessions for a 200+ student community. Simultaneously driving two technical verticals — spearheading the Android Development track and heading DSA upskilling sessions, mentoring members from fundamentals through advanced problem-solving.</p>
+          <p class="list-meta">Club Coordinator · 2025 – Present</p>
+          <h6>TechSoul (Technical Society) — Manav Rachna University</h6>
+          <p>Led a 5-member team to run 5+ workshops and hackathons for a 120+ student community.</p>
         </div>
       </div>
 
       <div class="list-item">
-        <div class="list-icon"><i class="fa-solid fa-code-branch"></i></div>
+        <div class="list-icon"><i class="icon icon-code-branch"></i></div>
         <div class="list-content">
           <p class="list-meta">Contest Coordinator · 2025 – Present</p>
-          <h6>CCMRU — Competitive Programming Cell, Manav Rachna University</h6>
-          <p>Designed and administered competitive programming contests, curating problem sets in data structures, dynamic programming, and graph theory for 150+ participants.</p>
+          <h6>CCMRU (Competitive Programming Cell) — Manav Rachna University</h6>
+          <p>Designed and administered contests, curating problem sets for 150+ competitive programming participants.</p>
         </div>
       </div>
 
       <div class="list-item">
-        <div class="list-icon"><i class="fa-solid fa-flag-checkered"></i></div>
+        <div class="list-icon"><i class="icon icon-seedling"></i></div>
         <div class="list-content">
-          <p class="list-meta">Hackathon Team Lead · 2024</p>
-          <h6>Multi-Hackathon Leader — Google, InnoSkill & Tech Showcase 2K24</h6>
-          <p>Led the team across three competitive hackathons — captured <strong>1st Place at Google Digital Campus Hackathon</strong>, secured <strong>Runner-Up at InnoSkill</strong>, and <strong>Runner-Up at Tech Showcase 2K24</strong>, driving ideation, technical architecture, and live demo delivery under time pressure.</p>
+          <p class="list-meta">Active Volunteer · 2024 – Present</p>
+          <h6>OP Bhalla Foundation (NGO)</h6>
+          <p>Taught foundational CS and digital literacy to underserved government school students; supported community health camps.</p>
         </div>
       </div>
     </article>
 
     <!-- ACHIEVEMENTS -->
     <article id="Achievements" class="section-card">
-      <h2 class="section-title"><i class="fa-solid fa-trophy"></i>Achievements</h2>
+      <h2 class="section-title"><i class="icon icon-trophy"></i>Achievements</h2>
       <hr class="section-divider">
 
       <div class="list-item">
-        <div class="list-icon"><i class="fa-solid fa-medal"></i></div>
+        <div class="list-icon"><i class="icon icon-medal"></i></div>
         <div class="list-content">
-          <h6>Dean's List — 2× Awardee</h6>
-          <p>Top 5% of university cohort (Sem 1 & 2) · CGPA: 9.27/10.0</p>
+          <h6>Dean's List: 3× Awardee &nbsp;|&nbsp; Vice Chancellor’s List: 1× Awardee</h6>
+          <p>Top 1% of university cohort · CGPA: 9.36/10.0</p>
         </div>
       </div>
 
       <div class="list-item">
-        <div class="list-icon"><i class="fa-solid fa-trophy"></i></div>
+        <div class="list-icon"><i class="icon icon-trophy"></i></div>
         <div class="list-content">
-          <h6>Hackathon Wins</h6>
-          <p>🥇 1st Place · Google Digital Campus Hackathon &nbsp;|&nbsp; 🥈 Runner-Up · InnoSkill &nbsp;|&nbsp; 🥈 Runner-Up · Tech Showcase 2K24</p>
+          <h6>Hackathons</h6>
+          <p>🥇 1st Place, Google Digital Campus Hackathon &nbsp;|&nbsp; 🥈 Runner-Up, InnoSkill &nbsp;|&nbsp; 🥈 Runner-Up, Tech Showcase 2K24</p>
         </div>
       </div>
 
       <div class="list-item">
-        <div class="list-icon"><i class="fa-solid fa-code"></i></div>
+        <div class="list-icon"><i class="icon icon-code"></i></div>
         <div class="list-content">
           <h6>Competitive Programming</h6>
-          <p>Codeforces Pupil &nbsp;|&nbsp; CodeChef <strong>3★ · Rating 1618</strong> &nbsp;|&nbsp; 300+ problems solved across LeetCode, Codeforces & CodeChef</p>
-        </div>
-      </div>
-
-      <div class="list-item">
-        <div class="list-icon"><i class="fa-solid fa-rocket"></i></div>
-        <div class="list-content">
-          <h6>Pre-Incubation — Institutional Selection</h6>
-          <p>Selected for institutional pre-incubation programme for an AI-driven startup concept (2024)</p>
+          <p>Codeforces Pupil &nbsp;|&nbsp; CodeChef <strong>3★ Rated (1712)</strong> &nbsp;|&nbsp; 600+ problems solved across platforms</p>
         </div>
       </div>
     </article>
 
     <!-- CODING PROFILES -->
     <article id="Profiles" class="section-card">
-      <h2 class="section-title"><i class="fa-brands fa-github"></i>Coding Profiles</h2>
+      <h2 class="section-title"><i class="icon icon-github"></i>Coding Profiles</h2>
       <hr class="section-divider">
       <div class="connect-grid">
         <a class="connect-item" href="https://github.com/PiyushAdy" target="_blank">
-          <i class="fa-brands fa-github-alt"></i>GitHub
+          <i class="icon icon-github-alt"></i>GitHub
         </a>
         <a class="connect-item" href="https://www.hackerrank.com/profile/piyushady125" target="_blank">
-          <i class="fa-brands fa-hackerrank"></i>HackerRank
+          <i class="icon icon-hackerrank"></i>HackerRank
         </a>
         <a class="connect-item" href="https://www.codechef.com/users/piyushady125" target="_blank">
-          <i class="fa-solid fa-hat-chef"></i>CodeChef
+          <i class="icon icon-utensils"></i>CodeChef
         </a>
         <a class="connect-item" href="https://codeforces.com/profile/piyushady125" target="_blank">
-          <i class="fa-solid fa-chart-simple"></i>Codeforces
+          <i class="icon icon-chart-simple"></i>Codeforces
         </a>
         <a class="connect-item" href="https://piyushady.github.io" target="_blank">
-          <i class="fa-solid fa-globe"></i>Portfolio Site
+          <i class="icon icon-globe"></i>Portfolio Site
         </a>
       </div>
     </article>
 
     <!-- SOCIALS -->
     <article id="Socials" class="section-card">
-      <h2 class="section-title"><i class="fa-solid fa-address-card"></i>Connect With Me</h2>
+      <h2 class="section-title"><i class="icon icon-address-card"></i>Connect With Me</h2>
       <hr class="section-divider">
       <div class="connect-grid">
         <a class="connect-item" href="https://linkedin.com/in/piyushady" target="_blank">
-          <i class="fa-brands fa-linkedin"></i>LinkedIn
+          <i class="icon icon-linkedin"></i>LinkedIn
         </a>
         <a class="connect-item" href="https://x.com/PiyushAdy" target="_blank">
-          <i class="fa-brands fa-x-twitter"></i>Twitter / X
+          <i class="icon icon-x-twitter"></i>Twitter / X
         </a>
         <a class="connect-item" href="mailto:piyushady125@gmail.com">
-          <i class="fa-solid fa-envelope"></i>piyushady125@gmail.com
+          <i class="icon icon-envelope"></i>piyushady125@gmail.com
         </a>
         <a class="connect-item" href="tel:+919818385187">
-          <i class="fa-solid fa-phone"></i>+91 9818385187
+          <i class="icon icon-phone"></i>+91 9818385187
         </a>
       </div>
     </article>
